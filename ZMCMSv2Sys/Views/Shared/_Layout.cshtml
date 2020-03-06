@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    @*Google Font*@
+    <script src="~/Scripts/dtree.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <header class="main-header">
+        @*左上角系統名稱示*@
+        @*<a href="@Url.Action("Index","Home")" class="logo">*@
+        <a href="@Url.Action("Index","Home", new { area = "" })" class="logo">            
+            <span class="logo-lg"><b>資訊系統</b>平台</span>
+        </a>
+
+        <nav class="navbar navbar-static-top">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <div style="font-size:larger;color:white;line-height:50px;">
+                <span>醫事機構名稱：@ViewBag.Name</span>
+            </div>
+        </nav>
+    </header>
+
+    @*左側欄右上而下設定*@
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- 尋找欄 : search form -->
+            @*@RenderSection("search", required: false)*@
+            <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="尋找...">
+                    <span class="input-group-btn">
+                        <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </form>
+
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            @*<ul class="sidebar-menu" data-widget="tree">
+                <li class="header">導航列</li>
+                <li><a href="~/SysHospital/SysHospital">醫事機構資料</a></li>*@
+                @*<li><a href="~/HRForm/AttendData">出缺勤作業</a></li>
+            <li><a href="~/HRForm/LeaveForm">請假單</a></li>
+            <li><a href="~/HRForm/OvertimeForm">加班單</a></li>*@
+            @*</ul>*@
+            <div class="dtree">
+                <p><a href="javascript: d.openAll();">展開</a> | <a href="javascript: d.closeAll();">關閉</a></p>
+                <script type="text/javascript">
+                    d = new dTree('d');
+
+                    d.add(0, -1, 'aa');
+                    d.add(10, 0, '回首頁', '@Url.Action("Index","Home", new { area = "" })');
+                    d.add(11, 0, '申報資料上傳作業', '/Sys/HIUpload');
+                    //d.add(10, 1, '系統參數設定', 'http://localhost:2413/ZMSystem/SysCombo');
+                    //d.add(11, 1, '醫事機構系統參數設定', 'http://localhost:2413/ZMSystem/SysComboH');
+                    //d.add(12, 1, '應用程式管理維護', 'http://localhost:2413/ZMSystem/SysProgram');
+                    //d.add(13, 1, '系統角色管理維護', 'http://localhost:2413/ZMSystem/SysRole');
+                    //d.add(14, 1, '使用者角色管理', 'http://localhost:2413/ZMSystem/SysUser?MGType=S');
+                    //d.add(20, 2, '醫療群組資料', 'http://localhost:2413/SysMedicalGroup/SysMedicalGroup?MGType=G');
+                    //d.add(21, 2, '醫事機構資料', 'http://localhost:2413/SysHospital/SysHospital');
+                    //d.add(22, 2, '醫事機構系統帳號管理', 'http://localhost:2413/SysHospitalGrafting/SysHospitalGrafting');
+                    //d.add(23, 2, '醫事機構科別資料維護', 'http://localhost:2413/SysHospital/SysHospitalClinic');
+                    //d.add(24, 2, '醫事機構相關系統資訊管理', 'http://localhost:2413/SysHospital/SysHospitalDept');
+                    //d.add(25, 2, '醫事機構科系所屬科別維護', 'http://localhost:2413/SysHospital/SysHCDept');
+                    //d.add(4, 0, 'Node 3', 'example01.html');
+                    //d.add(5, 3, 'Node 1.1.1', 'example01.html');
+                    //d.add(6, 5, 'Node 1.1.1.1', 'example01.html');
+                    //d.add(7, 0, 'Node 4', 'example01.html');
+                    //d.add(8, 1, 'Node 1.2', 'example01.html');
+                    //d.add(9, 0, 'My Pictures', 'example01.html', 'Pictures I\'ve taken over the years', '', '', 'img/imgfolder.gif');
+                    //d.add(10, 9, 'The trip to Iceland', 'example01.html', 'Pictures of Gullfoss and Geysir');
+                    //d.add(11, 9, 'Mom\'s birthday', 'example01.html');
+                    //d.add(12, 0, 'Recycle Bin', 'example01.html', '', '', 'PhotoCloud/SystemImages/trash.gif');
+
+                    document.write(d);
+
+                    //-->
+                </script>
+            </div>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    @*右側工作區由上而下設定*@
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            @*<h1>
+            系統資訊儀表板
+            <small>控制面板</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="@Url.Action("Index","Home", new { area = "" })"><i class="fas fa-home"></i> 首頁</a></li>
+        </ol>*@
+            @RenderSection("childMenuBoard", required: false)
+        </section>
+        <!-- Main content -->        
+        <section class="content">
+            <!-- /.row -->
+            @*主要資訊呈現區塊*@
+            @RenderBody()
+        </section>
+        <!-- /.content -->
+    </div>
+
+    @*底部系統相關資訊及版本訊息*@
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> @ViewBag.Version
+        </div>
+        <strong>版權所有</strong>|        
+        <a href="http://www.zeromed.com.tw">凌壹科技顧問股份有限公司 (ZeroMed Co., Ltd.)</a>
+    </footer>
+
+    @*右側側邊視窗系統設定*@
+    <!-- Control Sidebar -->
+    <!-- /.control-sidebar -->
+
+    <div class="control-sidebar-bg"></div>
+
+    @Scripts.Render("~/bundles/jquery")
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Content/js")
+</body>
+</html>

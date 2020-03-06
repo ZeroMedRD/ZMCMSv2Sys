@@ -1,0 +1,65 @@
+﻿.form-group-padding {
+    padding-left: 5px !important;
+    padding-right: 0px !important;
+    padding-top: 0px !important;
+    padding-bottom: 10px !important;
+}
+
+.row-padding {
+    padding-left: 15px !important;
+    padding-right: 10px !important;
+}
+
+.HeadOneWidth {
+    float: left;
+    width: 20%;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    background-color: #eee;
+    padding: 4px 12px 4px 12px;
+    margin-left: 3px;
+    margin-right: 3px;
+    font-size: larger;
+}
+
+.BodyOneWidth {
+    float: left !important;
+    width: 75% !important;
+    font-size: larger !important;
+}
+
+.HeadTwoWidth {
+    float: left !important;
+    width: 40% !important;
+    border: 1px solid #ccc !important;
+    border-radius: 2px !important;
+    background-color: #eee !important;
+    padding: 4px 12px 4px 12px !important;
+    margin-left: 3px !important;
+    margin-right: 3px !important;
+    font-size: larger !important;
+}
+
+.BodyTwoWidth {
+    float: left !important;
+    width: 48% !important;
+    font-size: larger !important;
+}
+
+.InputOneBox {
+    border: 2px solid #ccc;
+    font-size: larger !important;
+    width: 99%;
+}
+
+.InputTwoBox {
+
+    border: 2px solid #ccc;
+    font-size: larger !important;
+    width: 100%;
+}
+
+.large-checkbox {
+    width: 25px;
+    height: 25px;
+}
