@@ -29,7 +29,7 @@ namespace ZMCMSv2Sys.Controllers
             return Json(result);
         }
 
-        public ActionResult Async_Save(IEnumerable<HttpPostedFileBase> annex)
+        public ActionResult Async_Save(IEnumerable<HttpPostedFileBase> annex, string HospID)
         {
             string connDRUGSys = ConfigurationManager.ConnectionStrings["connSysDB"].ConnectionString;
 
@@ -45,7 +45,9 @@ namespace ZMCMSv2Sys.Controllers
                         DirectoryInfo di = Directory.CreateDirectory(sDir);
                     }
 
-                    var destinationPath = Path.Combine(sDir + "/", fileName);
+                    Session["targetNewFileName"] = HospID + "_" + Guid.NewGuid().ToString() + "_" + fileName;
+
+                    var destinationPath = Path.Combine(sDir + "/", Session["targetNewFileName"].ToString());
                     file.SaveAs(destinationPath);
 
                     // 開始匯入         
@@ -84,6 +86,17 @@ namespace ZMCMSv2Sys.Controllers
             //        }
             //    }
             //}
+
+            if (Session["targetNewFileName"] != null)
+            {
+                string sDir = Server.MapPath("~/FileCloud") + @"/UploadFile/HITemp";
+
+                var deleteFile = Path.Combine(sDir + "/", Session["targetNewFileName"].ToString());
+                if (System.IO.File.Exists(deleteFile))
+                {
+                    System.IO.File.Delete(deleteFile);
+                }
+            }
 
             // Return an empty string to signify success
             return Content("");
