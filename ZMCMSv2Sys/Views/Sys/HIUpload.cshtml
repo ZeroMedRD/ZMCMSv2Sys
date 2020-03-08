@@ -24,32 +24,27 @@
             }
         }
 
+        function onChange() {
+            var pid = this.value();
+            alert(pid);
+            $.get('/HIUpload/Get_Dtlfa_By_Id', { sId: pid }, function (data) {
+                var grid = $("#grid_Dtlfa").data("kendoGrid");
+                grid.dataSource.read(); // rebind the Grid's DataSource
+            })
+        }
+
+        function additionalData(e) {
+            var value = $("#ddlTOTFA").data("kendoDropDownList").value();
+            return { sId: value }; // send the parent id value as part of the Read request
+        }
+
         function sync_handler(e) { this.read(); }
 
         function onClose() {
             $("#uploadButton").show();
             //$("#uploadButton").removeAttr('disabled');
         }
-
-        //function onOK(e) {
-        //    $.ajax({
-        //        url: '/DRUGSys/HIDrug/delHIDrug',
-        //        //url: '/HIDrug/delHIDrug',
-        //        method: 'GET',
-        //        success: function () { alert('已經清除'); }
-        //    });
-        //}
-        //$("#dialog").kendoDialog({
-        //open() {
-        //    $.ajax({
-        //        url: "/home/loaddialog",
-        //        method: 'GET',
-        //        success: function (result) {
-        //            $('#dialog').html(result);
-        //        }
-        //    });
-        //};
-
+                
         function onCancel() {
         }
 
@@ -125,14 +120,15 @@
 <body>
     <h2>申報資料上傳作業</h2>
     <div class="container-fluid">        
-        <div class="row">
-            <div class="input-group" style="float:left;">
-                <div>
+        <div class="row" style="padding-bottom:5px;">
+            <div class="col-md-2">
+                <div class="input-group" style="float:left;">
                     <span class="input-group-addon no-modify-color">申報年月：</span>
                     @(Html.Kendo().DropDownList()
                         .Name("ddlTOTFA")
                         .DataTextField("t3")
                         .DataValueField("id")
+                        .Events(e => e.Change("onChange"))
                         .DataSource(source =>
                         {
                             source.Read(read =>
@@ -141,12 +137,16 @@
                             });
                         })
                         .Enable(true)
-                        .HtmlAttributes(new { @class = "form-control pull-left", @style = "width:10%" })
+                        .HtmlAttributes(new { @class = "form-control pull-left" })                        
                     )
                 </div>
-                <div><button type="button" class="btn btn-primary active" style="padding-right:5px;">查詢</button></div> 
-                <div><span id="uploadButton" class="btn btn-success active">上傳檔案(TOTFA.XML)</span></div>
-</div>
+            </div>
+            <div class="col-md-7">
+                <div style="float:left;padding-right:10px;"><button type="submit" class="btn bg-blue-active">查詢</button></div>
+                <div style="float:left;"><span id="uploadButton" class="btn bg-blue-active">上傳檔案(TOTFA.XML)</span></div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-8">
                 <div class="box box-success">
                     <div class="box-header with-border head-title">
@@ -159,18 +159,18 @@
                     </div>
                     <div class="box-body">
                         <div id="myWindow">
-                            @(Html.Kendo().Grid<ZMCMSv2Sys.ViewModels.ViewModel_HITotfa>()
+                            @(Html.Kendo().Grid<ZMCMSv2Sys.ViewModels.ViewModel_HIDtlfa>()
                                 .Name("grid_Dtlfa")
                                 //.Selectable(selectable => selectable.Mode(GridSelectionMode.Single).Type(GridSelectionType.Row))
                                 .Columns(columns =>
                                 {
-                                    columns.Bound(c => c.id).Hidden(true);
-                                    columns.Bound(c => c.t1).Hidden(true);
-                                    columns.Bound(c => c.t2).Hidden(true);
-                                    columns.Bound(c => c.t3);
-                                    columns.Bound(c => c.t4).Hidden(true);
-                                    columns.Bound(c => c.t5).Hidden(true);
-                                    columns.Bound(c => c.t6);
+                                    columns.Bound(d => d.id).Hidden(true);
+                                    columns.Bound(d => d.totfa_id).Hidden(true);
+                                    columns.Bound(d => d.d1);
+                                    columns.Bound(d => d.d2);
+                                    columns.Bound(d => d.d8);
+                                    columns.Bound(d => d.d9);
+                                    columns.Bound(d => d.d10);
                                 })
                                 //.AllowCopy(true)
                                 .ToolBar(toolbar =>
@@ -185,7 +185,7 @@
                                                     <a class="k-button k-button-icontext k-grid-excel" href="#"><span class="k-icon k-i-excel"></span>輸出到 Excel</a>
                                                 </div>
                                 </text>);
-                            })
+                                })
               .ColumnMenu()
               .Excel(e => e.AllPages(true))
               //.Groupable()
@@ -200,13 +200,19 @@
                   })
               .Filterable()
               //Scrollable(scrollable => scrollable.Enabled(false))
-              .Scrollable(scrollable => scrollable.Enabled(true).Height(400))
+              .Scrollable(scrollable => scrollable.Enabled(true).Height(500))
+              .Sortable(sortable =>
+              {
+                  sortable.SortMode(GridSortMode.SingleColumn);
+              })
+              .AutoBind(false)
               .DataSource(dataSource => dataSource
                   .Ajax()
-                  .PageSize(100)
+                  .ServerOperation(false)
+                  .PageSize(5)
                   .Model(model => model.Id(p => p.id))
                   //.Events(events => events.Error("error_handler").Sync("sync_handler"))
-                  .Read(read => read.Action("HI_Read", "HIUpload"))
+                  .Read(read => read.Action("Get_Dtlfa_By_Id", "HIUpload").Data("additionalData"))
               )
                             )
 
@@ -219,9 +225,9 @@
                                             .HtmlAttributes(new { accept = ".xml" })
                                             .Validation(v => v.AllowedExtensions(new string[] { ".xml", ".zip" }))
                                             .Async(async => async.AutoUpload(false)
-                                                .Save("Async_Save", "HIUpload")
+                                                .Save("Async_Save", "HIUpload", new { HospID = "1234567890" })
                                                 .Remove("Async_Remove", "HIUpload"))
-                                                //.Events(e => e.Success("onSuccess"))
+                                        //.Events(e => e.Success("onSuccess"))
                                         )
                                     }
                             </text>).Draggable().Resizable().Width(350).Actions(actions => actions.Close()).Events(ev => ev.Close("onClose")).Visible(false)
@@ -233,8 +239,7 @@
         </div>
             <div class="col-md-4">
             </div>
-        </div>
-    </div>
+        </div>    
 </body>
 </html>
 

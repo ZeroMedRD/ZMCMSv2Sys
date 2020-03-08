@@ -19,12 +19,22 @@ namespace ZMCMSv2Sys.Controllers
 {
     public class HIUploadController : Controller
     {
-        private HISEntities db_his = new HISEntities();        
+        private HISEntities db_his = new HISEntities();
 
-        public ActionResult HI_Read([DataSourceRequest]DataSourceRequest request)
+        //public ActionResult HI_Read([DataSourceRequest]DataSourceRequest request)
+        //{
+        //    DataSourceResult
+        //        result = (from t in db_his.totfa select t).ToDataSourceResult(request);
+
+        //    return Json(result);
+        //}
+
+        public ActionResult Get_Dtlfa_By_Id([DataSourceRequest]DataSourceRequest request, string sId)
         {
+            string ssid = sId;
+
             DataSourceResult
-                result = (from t in db_his.totfa select t).ToDataSourceResult(request);
+                result = (from d in db_his.dtlfa where d.totfa_id == sId orderby d.d2 select d).ToDataSourceResult(request);
 
             return Json(result);
         }

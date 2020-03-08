@@ -42,34 +42,60 @@ namespace ZMCMSv2Sys.ViewModels
         public string t40 { get; set; }
     }
 
-    public class ViewModel_SchemaBody
+    public class ViewModel_HIDtlfa
     {
         [Display(Name = "資料序號")]
-        public string SBRowid { get; set; }
+        public string id { get; set; }
 
-        [Display(Name = "資料表資料序號")]
-        public string SHRowid { get; set; }
-              
-        [Display(Name = "欄位名稱")]
-        public string SBFieldName { get; set; }
+        [Display(Name = "總表資料序號")]
+        public string totfa_id { get; set; }
 
-        [Display(Name = "欄位型態")]
-        public string SBFieldtype { get; set; }
-                
-        [Display(Name = "欄位長度")]
-        public string SBFieldLength { get; set; }
+        [Display(Name = "案件分類(d1)")]
+        public string d1 { get; set; }
 
-        // 影片型態可分 youtube 網址連結或上傳的檔名
-        [Display(Name = "欄位小數長度")]
-        public string SBFieldScales { get; set; }
+        [Display(Name = "流水編號(d2)")]
+        public string d2 { get; set; }
 
-        [Display(Name = "欄位說明")]
-        public string SBFieldDesc { get; set; }
+        [Display(Name = "就醫科別(d8)")]
+        public string d8 { get; set; }
 
-        [Display(Name = "欄位詳細說明")]
-        public string SBFieldDetailDesc { get; set; }
+        [Display(Name = "就醫日期(d9)")]
+        public string d9 { get; set; }
 
-        [Display(Name = "匯入順序")]
-        public int SBImportSeq { get; set; }
+        [Display(Name = "治療結束日期(d10)")]
+        public string d10 { get; set; }       
+    }
+
+    public class ViewModel_HIOrdfa
+    {
+        [Display(Name = "資料序號")]
+        public string id { get; set; }
+
+        [Display(Name = "點數清單資料序號")]
+        public string dtlfa_id { get; set; }
+
+        [Display(Name = "藥品給藥日份(p1)")]
+        public string p1 { get; set; }
+
+        [Display(Name = "醫令調劑方式(p2)")]
+        public string p2 { get; set; }
+
+        [Display(Name = "醫令類別(p3)")]
+        public string p3 { get; set; }
+
+        [Display(Name = "藥品(項目)代號(p4)")]
+        public string p4 { get; set; }
+
+        [Display(Name = "藥品用量(p5)")]
+        public string p5 { get; set; }
+
+        [Display(Name = "診療之部位(p6)")]
+        public string p6 { get; set; }
+
+        [Display(Name = "藥品使用頻率(p7)")]
+        public string p7 { get; set; }
+
+        [Display(Name = "醫令序(p13)")]
+        public string p13 { get; set; }
     }
 }

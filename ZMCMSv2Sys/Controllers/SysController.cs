@@ -27,7 +27,7 @@ namespace ZMCMSv2Sys.Controllers
         {
             var result = (from t in db_his.totfa 
                           where t.t2 == HospID 
-                          orderby t.t3 select new { t.id, t.t3 });
+                          orderby t.t3 descending select new { t.id, t.t3 });
 
             return Json(result, JsonRequestBehavior.AllowGet);
             //return Json(result);
