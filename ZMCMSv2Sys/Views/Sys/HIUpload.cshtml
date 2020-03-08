@@ -27,7 +27,8 @@
         function sync_handler(e) { this.read(); }
 
         function onClose() {
-            $("#undo").show();
+            $("#uploadButton").show();
+            //$("#uploadButton").removeAttr('disabled');
         }
 
         //function onOK(e) {
@@ -66,10 +67,11 @@
         }
 
         $(document).ready(function () {
-            $("#undo").bind("click", function () {
+            $("#uploadButton").bind("click", function () {
                 $("#window").data("kendoWindow").open();
                 $("#window").data("kendoWindow").center();
-                $("#undo").hide();
+                $("#uploadButton").hide();
+                //$("#uploadButton").attr('disabled','disabled');
             });
 
             //$("#showDialogBtn").bind("click", function () {
@@ -124,10 +126,31 @@
     <h2>申報資料上傳作業</h2>
     <div class="container-fluid">        
         <div class="row">
+            <div class="input-group" style="float:left;">
+                <div>
+                    <span class="input-group-addon no-modify-color">申報年月：</span>
+                    @(Html.Kendo().DropDownList()
+                        .Name("ddlTOTFA")
+                        .DataTextField("t3")
+                        .DataValueField("id")
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetTotfa", "Sys", new { HospID = "1234567890" });
+                            });
+                        })
+                        .Enable(true)
+                        .HtmlAttributes(new { @class = "form-control pull-left", @style = "width:10%" })
+                    )
+                </div>
+                <div><button type="button" class="btn btn-primary active" style="padding-right:5px;">查詢</button></div> 
+                <div><span id="uploadButton" class="btn btn-success active">上傳檔案(TOTFA.XML)</span></div>
+</div>
             <div class="col-md-8">
                 <div class="box box-success">
                     <div class="box-header with-border head-title">
-                        <h3 class="box-title">已上傳申報資料</h3>
+                        <h3 class="box-title">申報資料</h3>
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool head-title" data-widget="collapse" data-toggle="tooltip">
                                 <i class="fa fa-minus"></i>
@@ -137,8 +160,8 @@
                     <div class="box-body">
                         <div id="myWindow">
                             @(Html.Kendo().Grid<ZMCMSv2Sys.ViewModels.ViewModel_HITotfa>()
-                                .Name("grid_HITotfa")
-                                .Selectable(selectable => selectable.Mode(GridSelectionMode.Single).Type(GridSelectionType.Row))
+                                .Name("grid_Dtlfa")
+                                //.Selectable(selectable => selectable.Mode(GridSelectionMode.Single).Type(GridSelectionType.Row))
                                 .Columns(columns =>
                                 {
                                     columns.Bound(c => c.id).Hidden(true);
@@ -149,65 +172,65 @@
                                     columns.Bound(c => c.t5).Hidden(true);
                                     columns.Bound(c => c.t6);
                                 })
-                                .AllowCopy(true)
+                                //.AllowCopy(true)
                                 .ToolBar(toolbar =>
                                 {
                                 toolbar.Template(@<text>
-                                    <div>
-                                        @*@(Html.Kendo().Button().Name("showDialogBtn")
-                                                        .HtmlAttributes(new { @class = "hide-on-narrow" })
-                                                        .Content("清除資料")
-                                                        .Events(ev => ev.Click("showDialog")))*@                                                    
-                                        <span id="undo" class="k-button hide-on-narrow">上傳檔案(TOTFA.XML)</span>
-                                        <a class="k-button k-button-icontext k-grid-excel" href="#"><span class="k-icon k-i-excel"></span>輸出到 Excel</a>
-                                    </div>
-                                    </text>);
-                                })
-                                .ColumnMenu()
-                                .Excel(e => e.AllPages(true))
-                                //.Groupable()
-                                .Pageable(page => page.Refresh(true)
-                                    .ButtonCount(30)
-                                    .PageSizes(new[] { 10, 20, 30, 50, 100, 300, 500, 1000 })
-                                    .Messages(message => message.ItemsPerPage("每頁顯示數目")))
-                                    .Navigatable()
-                                    .Sortable(sortable =>
-                                    {
-                                        sortable.SortMode(GridSortMode.MultipleColumn);
-                                    })
-                                .Filterable()
-                                //Scrollable(scrollable => scrollable.Enabled(false))
-                                .Scrollable(scrollable => scrollable.Enabled(true).Height(400))
-                                .DataSource(dataSource => dataSource
-                                    .Ajax()
-                                    .PageSize(100)                                    
-                                    .Model(model => model.Id(p => p.id))
-                                    //.Events(events => events.Error("error_handler").Sync("sync_handler"))
-                                    .Read(read => read.Action("HI_Read", "HIUpload"))
-                                )
+                                                <div>
+                                                    @*@(Html.Kendo().Button().Name("showDialogBtn")
+                                                .HtmlAttributes(new { @class = "hide-on-narrow" })
+                                                .Content("清除資料")
+                                                .Events(ev => ev.Click("showDialog")))*@
+                                                    @*<span id="undo" class="k-button hide-on-narrow">上傳檔案(TOTFA.XML)</span>*@
+                                                    <a class="k-button k-button-icontext k-grid-excel" href="#"><span class="k-icon k-i-excel"></span>輸出到 Excel</a>
+                                                </div>
+                                </text>);
+                            })
+              .ColumnMenu()
+              .Excel(e => e.AllPages(true))
+              //.Groupable()
+              .Pageable(page => page.Refresh(true)
+                  .ButtonCount(30)
+                  .PageSizes(new[] { 10, 20, 30, 50, 100, 300, 500, 1000 })
+                  .Messages(message => message.ItemsPerPage("每頁顯示數目")))
+                  .Navigatable()
+                  .Sortable(sortable =>
+                  {
+                      sortable.SortMode(GridSortMode.MultipleColumn);
+                  })
+              .Filterable()
+              //Scrollable(scrollable => scrollable.Enabled(false))
+              .Scrollable(scrollable => scrollable.Enabled(true).Height(400))
+              .DataSource(dataSource => dataSource
+                  .Ajax()
+                  .PageSize(100)
+                  .Model(model => model.Id(p => p.id))
+                  //.Events(events => events.Error("error_handler").Sync("sync_handler"))
+                  .Read(read => read.Action("HI_Read", "HIUpload"))
+              )
                             )
 
                             @(Html.Kendo().Window().Name("window").Title("上傳檔案").Content(@<text>
-                                @using (@Html.BeginForm())
-                                {
-                                    @(Html.Kendo().Upload()
-                                        .Multiple(true)
-                                        .Name("annex")
-                                        .HtmlAttributes(new { accept = ".xml" })
-                                        .Validation(v => v.AllowedExtensions(new string[] { ".xml", ".zip" }))
-                                        .Async(async => async.AutoUpload(false)
-                                            .Save("Async_Save", "HIUpload")
-                                            .Remove("Async_Remove", "HIUpload"))
-                                            //.Events(e => e.Success("onSuccess"))
+                                    @using (@Html.BeginForm())
+                                    {
+                                        @(Html.Kendo().Upload()
+                                            .Multiple(true)
+                                            .Name("annex")
+                                            .HtmlAttributes(new { accept = ".xml" })
+                                            .Validation(v => v.AllowedExtensions(new string[] { ".xml", ".zip" }))
+                                            .Async(async => async.AutoUpload(false)
+                                                .Save("Async_Save", "HIUpload")
+                                                .Remove("Async_Remove", "HIUpload"))
+                                                //.Events(e => e.Success("onSuccess"))
                                         )
-                                }
-                                </text>).Draggable().Resizable().Width(350).Actions(actions => actions.Close()).Events(ev => ev.Close("onClose")).Visible(false)
-                            )                            
+                                    }
+                            </text>).Draggable().Resizable().Width(350).Actions(actions => actions.Close()).Events(ev => ev.Close("onClose")).Visible(false)
+                            )
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
             <div class="col-md-4">
             </div>
         </div>
