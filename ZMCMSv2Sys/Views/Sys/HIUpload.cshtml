@@ -26,15 +26,20 @@
 
         function onChange() {
             var pid = this.value();
-            alert(pid);
-            $.get('/HIUpload/Get_Dtlfa_By_Id', { sId: pid }, function (data) {
-                var grid = $("#grid_Dtlfa").data("kendoGrid");
-                grid.dataSource.read(); // rebind the Grid's DataSource
-            })
+
+            var grid = $("#grid_Dtlfa").data("kendoGrid");
+                grid.dataSource.read(pid); // rebind the Grid's DataSource
+            //alert(pid);
+            //$.get('/HIUpload/Get_Dtlfa_By_Id', { sId: pid }, function (data) {
+            //    alert(sId)
+            //    var grid = $("#grid_Dtlfa").data("kendoGrid");
+            //    grid.dataSource.read(); // rebind the Grid's DataSource
+            //})
         }
 
         function additionalData(e) {
             var value = $("#ddlTOTFA").data("kendoDropDownList").value();
+            //alert(value);
             return { sId: value }; // send the parent id value as part of the Read request
         }
 
@@ -142,8 +147,8 @@
                 </div>
             </div>
             <div class="col-md-7">
-                <div style="float:left;padding-right:10px;"><button type="submit" class="btn bg-blue-active">查詢</button></div>
-                <div style="float:left;"><span id="uploadButton" class="btn bg-blue-active">上傳檔案(TOTFA.XML)</span></div>
+                @*<div style="float:left;padding-right:10px;"><button type="submit" class="btn bg-blue-active">查詢</button></div>*@
+                <span id="uploadButton" class="btn bg-blue-active">上傳檔案(TOTFA.XML)</span>
             </div>
         </div>
         <div class="row">
@@ -175,45 +180,47 @@
                                 //.AllowCopy(true)
                                 .ToolBar(toolbar =>
                                 {
-                                toolbar.Template(@<text>
-                                                <div>
-                                                    @*@(Html.Kendo().Button().Name("showDialogBtn")
+                                    toolbar.Template(@<text>
+                                    <div>
+                                        @*@(Html.Kendo().Button().Name("showDialogBtn")
                                                 .HtmlAttributes(new { @class = "hide-on-narrow" })
                                                 .Content("清除資料")
                                                 .Events(ev => ev.Click("showDialog")))*@
-                                                    @*<span id="undo" class="k-button hide-on-narrow">上傳檔案(TOTFA.XML)</span>*@
-                                                    <a class="k-button k-button-icontext k-grid-excel" href="#"><span class="k-icon k-i-excel"></span>輸出到 Excel</a>
-                                                </div>
+                                        @*<span id="undo" class="k-button hide-on-narrow">上傳檔案(TOTFA.XML)</span>*@
+                                        <a class="k-button k-button-icontext k-grid-excel" href="#"><span class="k-icon k-i-excel"></span>輸出到 Excel</a>
+                                    </div>
                                 </text>);
                                 })
-              .ColumnMenu()
-              .Excel(e => e.AllPages(true))
-              //.Groupable()
-              .Pageable(page => page.Refresh(true)
-                  .ButtonCount(30)
-                  .PageSizes(new[] { 10, 20, 30, 50, 100, 300, 500, 1000 })
-                  .Messages(message => message.ItemsPerPage("每頁顯示數目")))
-                  .Navigatable()
-                  .Sortable(sortable =>
-                  {
-                      sortable.SortMode(GridSortMode.MultipleColumn);
-                  })
-              .Filterable()
-              //Scrollable(scrollable => scrollable.Enabled(false))
-              .Scrollable(scrollable => scrollable.Enabled(true).Height(500))
-              .Sortable(sortable =>
-              {
-                  sortable.SortMode(GridSortMode.SingleColumn);
-              })
-              .AutoBind(false)
-              .DataSource(dataSource => dataSource
-                  .Ajax()
-                  .ServerOperation(false)
-                  .PageSize(5)
-                  .Model(model => model.Id(p => p.id))
-                  //.Events(events => events.Error("error_handler").Sync("sync_handler"))
-                  .Read(read => read.Action("Get_Dtlfa_By_Id", "HIUpload").Data("additionalData"))
-              )
+                                .ColumnMenu()
+                                .Excel(e => e.AllPages(true))//.Groupable()
+                                .Pageable(page => page.Refresh(true)
+                                    .ButtonCount(30)
+                                    .PageSizes(new[] { 50, 100, 300, 500, 1000 })
+                                    .Messages(message => message.ItemsPerPage("每頁顯示數目")))
+                                    .Navigatable()
+                                    .Sortable(sortable =>
+                                    {
+                                        sortable.SortMode(GridSortMode.MultipleColumn);
+                                    })
+                                .Filterable()
+                                //Scrollable(scrollable => scrollable.Enabled(false))
+                                .Scrollable(scrollable => scrollable.Enabled(true).Height(500))
+                                .Sortable(sortable =>
+                                {
+                                    sortable.SortMode(GridSortMode.MultipleColumn);
+                                })
+                                //.AutoBind(false)
+                                .DataSource(dataSource => dataSource
+                                    .Ajax()
+                                    .Sort(x => { x.Add("d1").Ascending(); x.Add("d2").Ascending(); })
+                                    //.ServerOperation(false)
+                                    .PageSize(50)
+                                    .Model(model => model.Id(p => p.id))
+                                    //.Events(events => events.Error("error_handler").Sync("sync_handler"))
+                                    .Read(read => read.Action("Get_Dtlfa_By_Id", "HIUpload").Data("additionalData"))
+                                )
+                                .Events(events => events.DataBound("dataBound"))
+                                .ClientDetailTemplateId("OrdfaTemplate")
                             )
 
                             @(Html.Kendo().Window().Name("window").Title("上傳檔案").Content(@<text>
@@ -230,16 +237,16 @@
                                         //.Events(e => e.Success("onSuccess"))
                                         )
                                     }
-                            </text>).Draggable().Resizable().Width(350).Actions(actions => actions.Close()).Events(ev => ev.Close("onClose")).Visible(false)
+                                </text>).Draggable().Resizable().Width(350).Actions(actions => actions.Close()).Events(ev => ev.Close("onClose")).Visible(false)
                             )
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div>        
             <div class="col-md-4">
             </div>
-        </div>    
+        </div>
+
 </body>
 </html>
 

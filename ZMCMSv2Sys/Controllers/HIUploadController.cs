@@ -34,8 +34,8 @@ namespace ZMCMSv2Sys.Controllers
             string ssid = sId;
 
             DataSourceResult
-                result = (from d in db_his.dtlfa where d.totfa_id == sId orderby d.d2 select d).ToDataSourceResult(request);
-
+                result = (from d in db_his.dtlfa where d.totfa_id == sId select d).ToDataSourceResult(request);
+            
             return Json(result);
         }
 
