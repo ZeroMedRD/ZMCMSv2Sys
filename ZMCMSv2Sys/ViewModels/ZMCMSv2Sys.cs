@@ -74,6 +74,9 @@ namespace ZMCMSv2Sys.ViewModels
         [Display(Name = "點數清單資料序號")]
         public string dtlfa_id { get; set; }
 
+        [Display(Name = "醫令序")]
+        public int intSeq { get; set; }
+
         [Display(Name = "藥品給藥日份(p1)")]
         public string p1 { get; set; }
 
@@ -97,5 +100,26 @@ namespace ZMCMSv2Sys.ViewModels
 
         [Display(Name = "醫令序(p13)")]
         public string p13 { get; set; }
+    }
+
+    public class ViewModel_UploadServerStatus
+    {
+        [Display(Name = "資料序號")]
+        public string USRowid { get; set; }
+
+        [Display(Name = "醫事機構序號")]
+        public string USHospRowid { get; set; }
+
+        [Display(Name = "上傳檔案名稱")]
+        public string USLoadFilename { get; set; }
+
+        [Display(Name = "檔案上傳日期")]
+        public DateTime? USLoadDateTime { get; set; }
+
+        [Display(Name = "處理狀態")]
+        public string USServerStatus { get; set; }
+
+        [Display(Name = "上傳資料總筆數")]
+        public int USRecordCount { get; set; }
     }
 }

@@ -16,6 +16,7 @@ namespace ZMCMSv2Sys.Controllers
     public class SysController : Controller
     {
         private HISEntities db_his = new HISEntities();
+        private ZMCMSv2_SysEntities db_zmcmsv2_sys = new ZMCMSv2_SysEntities();
 
         // GET: Sys
         public ActionResult HIUpload()
@@ -32,5 +33,14 @@ namespace ZMCMSv2Sys.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
             //return Json(result);
         }
+
+        public ActionResult Get_ServerStatus_By_HospID([DataSourceRequest]DataSourceRequest request, string sHospRowid)
+        {
+            DataSourceResult
+                result = (from u in db_zmcmsv2_sys.UploadServer where u.USHospRowid == sHospRowid orderby u.USLoadDateTime select u).ToDataSourceResult(request);
+
+            return Json(result);
+        }
+
     }
 }

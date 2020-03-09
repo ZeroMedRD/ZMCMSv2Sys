@@ -19,26 +19,24 @@ namespace ZMCMSv2Sys.Controllers
 {
     public class HIUploadController : Controller
     {
-        private HISEntities db_his = new HISEntities();
-
-        //public ActionResult HI_Read([DataSourceRequest]DataSourceRequest request)
-        //{
-        //    DataSourceResult
-        //        result = (from t in db_his.totfa select t).ToDataSourceResult(request);
-
-        //    return Json(result);
-        //}
+        private HISEntities db_his = new HISEntities();        
 
         public ActionResult Get_Dtlfa_By_Id([DataSourceRequest]DataSourceRequest request, string sId)
         {
-            string ssid = sId;
-
             DataSourceResult
                 result = (from d in db_his.dtlfa where d.totfa_id == sId select d).ToDataSourceResult(request);
             
             return Json(result);
         }
 
+        public ActionResult Get_Ordfa_By_Id([DataSourceRequest]DataSourceRequest request, string id)
+        {
+            DataSourceResult
+                result = (from o in db_his.ordfa where o.dtlfa_id == id orderby o.p13 select o).ToDataSourceResult(request);
+
+            return Json(result);
+        }
+       
         public ActionResult Async_Save(IEnumerable<HttpPostedFileBase> annex, string HospID)
         {
             string connDRUGSys = ConfigurationManager.ConnectionStrings["connSysDB"].ConnectionString;

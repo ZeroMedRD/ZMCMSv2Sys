@@ -272,6 +272,16 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <Content Include="Scripts\tether.js" />
     <Content Include="Scripts\tether.min.js" />
+    <Content Include="ViewModels\ZMCMSv2SysModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ZMCMSv2SysModel.edmx</DependentUpon>
+      <LastGenOutput>ZMCMSv2SysModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ViewModels\ZMCMSv2SysModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ZMCMSv2SysModel.edmx</DependentUpon>
+      <LastGenOutput>ZMCMSv2SysModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -314,7 +324,25 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\UploadServer.cs">
+      <DependentUpon>ZMCMSv2SysModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\ZMCMSv2Sys.cs" />
+    <Compile Include="ViewModels\ZMCMSv2SysModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ZMCMSv2SysModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ZMCMSv2SysModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ZMCMSv2SysModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ZMCMSv2SysModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ZMCMSv2SysModel.edmx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -330,6 +358,13 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Sys\HIUpload.cshtml" />
+    <EntityDeploy Include="ViewModels\ZMCMSv2SysModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ZMCMSv2SysModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="ViewModels\ZMCMSv2SysModel.edmx.diagram">
+      <DependentUpon>ZMCMSv2SysModel.edmx</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
