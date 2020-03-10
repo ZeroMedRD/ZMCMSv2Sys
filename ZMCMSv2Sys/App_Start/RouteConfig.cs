@@ -16,7 +16,8 @@ namespace ZMCMSv2Sys
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = "9B366860-0837-4817-BF93-53530B5913D2" }
+                //defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

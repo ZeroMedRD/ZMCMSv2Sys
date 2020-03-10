@@ -47,7 +47,8 @@
 
         function onClose() {
             $("#uploadButton").show();
-            //$("#uploadButton").removeAttr('disabled');
+            var grid = $("#grid_UploadFile").data("kendoGrid");
+            grid.dataSource.read();
         }
                 
         function onCancel() {
@@ -121,15 +122,43 @@
             background-color: #F5F5F5;
         }
 
-        /*#grid_Dtlfa .k-grid-header .k-header {
+        .k-grid-header .k-header .k-link {
+            color: white !important;
+        }
+
+        #grid_Dtlfa .k-grid-header .k-header {
+            background-color: #18538b;
+        }
+        
+        #grid_UploadFile .k-grid-header .k-header {
             background-color: #005384;
-        }*/        
+        }
     </style>
 </head>
 <body>
     <h2>申報資料上傳作業</h2>
     <div class="container-fluid">
         <div class="row" style="padding-bottom:5px;">
+            <div class="col-md-2">
+                <div class="input-group" style="float:left;">
+                    <span class="input-group-addon no-modify-color">醫事機構：</span>
+                    @(Html.Kendo().DropDownList()
+                        .Name("ddlHospital")
+                        .DataTextField("HospName")
+                        .DataValueField("HospRowid")
+                        .Events(e => e.Change("onChange"))
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("GetHospital", "Sys", new { HospRowid = ViewBag.HospRowid });
+                            });
+                        })
+                        .Enable(true)
+                        .HtmlAttributes(new { @class = "form-control pull-left" })
+                    )
+                </div>
+            </div>
             <div class="col-md-2">
                 <div class="input-group" style="float:left;">
                     <span class="input-group-addon no-modify-color">申報年月：</span>
@@ -270,14 +299,14 @@
                     <div class="box-body">
                         <div id="myWindow">
                             @(Html.Kendo().Grid<ZMCMSv2Sys.ViewModels.ViewModel_UploadServerStatus>()
-                                .Name("grid_UploadFile")                                
+                                .Name("grid_UploadFile")
                                 .Columns(columns =>
                                 {
                                     columns.Bound(d => d.USRowid).Hidden(true);
                                     columns.Bound(d => d.USHospRowid).Hidden(true);
-                                    columns.Bound(d => d.USLoadDateTime);
+                                    columns.Bound(d => d.USLoadDateTime).Format("{0: yyyy-MM-dd HH:mm:ss}").Width(120);
                                     columns.Bound(d => d.USLoadFilename);
-                                    columns.Bound(d => d.USServerStatus).Width(150);
+                                    columns.Bound(d => d.USServerStatus).Width(80);
                                     columns.Bound(d => d.USRecordCount).Hidden(true);
                                 })
                                 .ColumnMenu()
@@ -288,21 +317,21 @@
                                 .Navigatable()
                                 .Sortable(sortable =>
                                 {
-                                    sortable.SortMode(GridSortMode.MultipleColumn);
-                                })
+            sortable.SortMode(GridSortMode.MultipleColumn);
+        })
                                 .Filterable()
                                 .Scrollable(scrollable => scrollable.Enabled(true).Height(500))
                                 .Sortable(sortable =>
                                 {
-                                    sortable.SortMode(GridSortMode.MultipleColumn);
-                                })
+            sortable.SortMode(GridSortMode.MultipleColumn);
+        })
                                 .DataSource(dataSource => dataSource
                                     .Ajax()
                                     .Sort(x => { x.Add("USLoadDateTime").Descending(); })
                                     .PageSize(50)
                                     .Model(model => model.Id(p => p.USRowid))
                                     //.Events(events => events.Error("error_handler").Sync("sync_handler"))
-                                    .Read(read => read.Action("Get_ServerStatus_By_HospID", "Sys", new { HospRowid = "" }))
+                                    .Read(read => read.Action("Get_ServerStatus_By_HospID", "Sys", new { HospRowid = "1234567890" }))
                                 ))
                         </div>
                     </div>

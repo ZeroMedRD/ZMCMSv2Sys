@@ -113,10 +113,10 @@ namespace ZMCMSv2Sys.ViewModels
         [Display(Name = "上傳檔案名稱")]
         public string USLoadFilename { get; set; }
 
-        [Display(Name = "檔案上傳日期")]
+        [Display(Name = "上傳日期")]
         public DateTime? USLoadDateTime { get; set; }
 
-        [Display(Name = "處理狀態")]
+        [Display(Name = "狀態")]
         public string USServerStatus { get; set; }
 
         [Display(Name = "上傳資料總筆數")]

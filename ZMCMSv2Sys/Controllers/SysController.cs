@@ -17,10 +17,13 @@ namespace ZMCMSv2Sys.Controllers
     {
         private HISEntities db_his = new HISEntities();
         private ZMCMSv2_SysEntities db_zmcmsv2_sys = new ZMCMSv2_SysEntities();
+        private ZMCMSEntities db_zmcms = new ZMCMSEntities();
 
         // GET: Sys
-        public ActionResult HIUpload()
+        public ActionResult HIUpload(string id)
         {
+            ViewBag.HospRowid = id;
+
             return View();
         }
 
@@ -34,10 +37,38 @@ namespace ZMCMSv2Sys.Controllers
             //return Json(result);
         }
 
-        public ActionResult Get_ServerStatus_By_HospID([DataSourceRequest]DataSourceRequest request, string sHospRowid)
+        public JsonResult GetHospital(string HospRowid)
+        {
+            //if (String.IsNullOrEmpty(HospRowid))
+            //{
+
+            //}
+
+            var result = (from sh in db_zmcms.SysHospital
+                          where sh.HospRowid == HospRowid
+                          orderby sh.HospID descending
+                          select new { sh.HospRowid, sh.HospID, sh.HospName });
+
+            return Json(result, JsonRequestBehavior.AllowGet);            
+        }
+
+        public ActionResult Get_ServerStatus_By_HospID([DataSourceRequest]DataSourceRequest request, string HospRowid)
         {
             DataSourceResult
-                result = (from u in db_zmcmsv2_sys.UploadServer where u.USHospRowid == sHospRowid orderby u.USLoadDateTime select u).ToDataSourceResult(request);
+                result = (from u in db_zmcmsv2_sys.UploadServer
+                          let USServerStatus = (u.USServerStatus == "S" ? "待處理" :
+                                                u.USServerStatus == "P" ? "處理中" :
+                                                u.USServerStatus == "E" ? "已完成" : u.USServerStatus)
+                          where u.USHospRowid == HospRowid orderby u.USLoadDateTime 
+                          select new 
+                          { 
+                              u.USRowid,
+                              u.USHospRowid,
+                              u.USLoadDateTime,
+                              u.USLoadFilename,                              
+                              USServerStatus,
+                              u.USRecordCount
+                          }).ToDataSourceResult(request);
 
             return Json(result);
         }
