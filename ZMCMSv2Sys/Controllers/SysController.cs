@@ -19,37 +19,44 @@ namespace ZMCMSv2Sys.Controllers
         private ZMCMSv2_SysEntities db_zmcmsv2_sys = new ZMCMSv2_SysEntities();
         private ZMCMSEntities db_zmcms = new ZMCMSEntities();
 
-        // GET: Sys
         public ActionResult HIUpload(string id)
         {
-            ViewBag.HospRowid = id;
+            ViewBag.HospID = id;
 
             return View();
         }
 
-        public JsonResult GetTotfa(string HospID)
+
+        public JsonResult GetTotfa(string sId)
         {
             var result = (from t in db_his.totfa 
-                          where t.t2 == HospID 
+                          where t.t2 == sId
                           orderby t.t3 descending select new { t.id, t.t3 });
 
             return Json(result, JsonRequestBehavior.AllowGet);
             //return Json(result);
         }
 
-        public JsonResult GetHospital(string HospRowid)
+        public JsonResult GetHospital(string HospID)
         {
-            //if (String.IsNullOrEmpty(HospRowid))
-            //{
-
-            //}
-
-            var result = (from sh in db_zmcms.SysHospital
-                          where sh.HospRowid == HospRowid
-                          orderby sh.HospID descending
-                          select new { sh.HospRowid, sh.HospID, sh.HospName });
-
-            return Json(result, JsonRequestBehavior.AllowGet);            
+            if (string.IsNullOrEmpty(HospID))
+            {
+                // 依使用者權限取得所屬的醫事機構選項
+                var result = (from sh in db_zmcms.SysHospital
+                              where sh.HospActive == true
+                              orderby sh.HospID descending
+                              select new { sh.HospID, sh.HospName });
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                // 依傳入的參數取得醫事機構選項
+                var result = (from sh in db_zmcms.SysHospital
+                              where sh.HospID == HospID && sh.HospActive == true
+                              orderby sh.HospID descending
+                              select new { sh.HospRowid, sh.HospID, sh.HospName });
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }                        
         }
 
         public ActionResult Get_ServerStatus_By_HospID([DataSourceRequest]DataSourceRequest request, string HospRowid)

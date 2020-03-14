@@ -79,12 +79,19 @@ namespace ZMCMSv2HIService
                 {
                     while (reader.Read())
                     {
-                        //Send these to your WinForms textboxes
+                        // 
                         string sUSRowid = reader["USRowid"].ToString();
                         string sUSHospRowid = reader["USHospRowid"].ToString();
                         string sUSLoadFilename = reader["USLoadFilename"].ToString();
 
+                        // 取得該主機的實際位置
+                        // 將取得的主機機位置解密
+                        // 產生連結資料
+                        // 
+
+
                         // 執行轉檔動作
+
                     }
                 }
             }

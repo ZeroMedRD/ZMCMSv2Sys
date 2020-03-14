@@ -63,7 +63,7 @@ namespace ZMCMSv2Sys.Controllers
                     var us = new UploadServer()
                     {
                         USRowid = Guid.NewGuid().ToString(),
-                        USHospRowid = "1234567890",
+                        USHospRowid = HospID,
                         USLoadFilename = Session["targetNewFileName"].ToString(),
                         USLoadDateTime = DateTime.Now,
                         USServerStatus = "S",
