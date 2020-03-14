@@ -14,26 +14,34 @@ using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using ZMCMSv2Sys.ViewModels;
 using ZMCMSv2Sys.Models;
+using OYLib;
 
 namespace ZMCMSv2Sys.Controllers
 {
     public class HIUploadController : Controller
     {
-        private HISEntities db_his = new HISEntities();
+        //private HISEntities db_his = new HISEntities();        
         private ZMCMSv2_SysEntities db_zmcmsv2_sys = new ZMCMSv2_SysEntities();
 
-        public ActionResult Get_Dtlfa_By_Id([DataSourceRequest]DataSourceRequest request, string sId)
+        OYClass myClass = new OYClass();
+
+        public ActionResult Get_Dtlfa_By_Id([DataSourceRequest]DataSourceRequest request, string sHospID, string sTotfaID)
         {
+            // 依據使用者所屬的醫事機構代碼切換所屬資料庫
+            HISEntities db_his = new HISEntities(myClass.GetSQLConnectionString(@"23.97.65.134,1933", "his" + sHospID, @"sa", @"I@ntif@t"));
+
             DataSourceResult
-                result = (from d in db_his.dtlfa where d.totfa_id == sId select d).ToDataSourceResult(request);
+                result = (from d in db_his.dtlfa where d.totfa_id == sTotfaID select d).ToDataSourceResult(request);
             
             return Json(result);
         }
 
-        public ActionResult Get_Ordfa_By_Id([DataSourceRequest]DataSourceRequest request, string id)
+        public ActionResult Get_Ordfa_By_Id([DataSourceRequest]DataSourceRequest request, string sHospID, string sDtlfaID)
         {
+            HISEntities db_his = new HISEntities(myClass.GetSQLConnectionString(@"23.97.65.134,1933", "his" + sHospID, @"sa", @"I@ntif@t"));
+
             DataSourceResult
-                result = (from o in db_his.ordfa where o.dtlfa_id == id orderby o.p13 select o).ToDataSourceResult(request);
+                result = (from o in db_his.ordfa where o.dtlfa_id == sDtlfaID orderby o.p13 select o).ToDataSourceResult(request);
 
             return Json(result);
         }
@@ -63,7 +71,8 @@ namespace ZMCMSv2Sys.Controllers
                     var us = new UploadServer()
                     {
                         USRowid = Guid.NewGuid().ToString(),
-                        USHospRowid = HospID,
+                        USHospRowid = "HIU",
+                        USHospID = HospID,
                         USLoadFilename = Session["targetNewFileName"].ToString(),
                         USLoadDateTime = DateTime.Now,
                         USServerStatus = "S",

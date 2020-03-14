@@ -24,12 +24,17 @@
             }
         }
 
-        //function onChange_totfa() {
-        //    var hospid = this.value();
+        function onChange_totfa() {
+            var hospid = this.value();            
 
-        //    var ddl = $("#ddlTOTFA").data("kendoDropDownList");
-        //        ddl.dataSource.read(hospid); // rebind the Grid's DataSource            
-        //}
+            var ddl = $("#ddlTOTFA").data("kendoDropDownList");            
+            ddl.dataSource.read(hospid); // rebind the Grid's DataSource
+
+            var gridDtlfa = $("#grid_Dtlfa").data("kendoGrid");
+            gridDtlfa.dataSource.read('');            
+            var grid = $("#grid_UploadFile").data("kendoGrid");
+            grid.dataSource.read(hospid);
+        }
 
         function FromHospitalData(e) {
             var value = $("#ddlHospital").data("kendoDropDownList").value();
@@ -41,19 +46,18 @@
             var pid = this.value();
 
             var grid = $("#grid_Dtlfa").data("kendoGrid");
-                grid.dataSource.read(pid); // rebind the Grid's DataSource
-            //alert(pid);
-            //$.get('/HIUpload/Get_Dtlfa_By_Id', { sId: pid }, function (data) {
-            //    alert(sId)
-            //    var grid = $("#grid_Dtlfa").data("kendoGrid");
-            //    grid.dataSource.read(); // rebind the Grid's DataSource
-            //})
+                grid.dataSource.read(pid); // rebind the Grid's DataSource            
         }
 
         function additionalData(e) {
-            var value = $("#ddlTOTFA").data("kendoDropDownList").value();
-            //alert(value);
-            return { sId: value }; // send the parent id value as part of the Read request
+            var HospIDValue = $("#ddlHospital").data("kendoDropDownList").value();
+            var TOTFAValue = $("#ddlTOTFA").data("kendoDropDownList").value();            
+            return { sHospID: HospIDValue, sTotfaID: TOTFAValue };
+        }
+
+        function GetHosptialSelected(e) {
+            var HospIDValue = $("#ddlHospital").data("kendoDropDownList").value();            
+            return { sHospID: HospIDValue};
         }
 
         function sync_handler(e) { this.read(); }
@@ -78,6 +82,12 @@
         function showDialog() {
             $("#dialogWindow").data("kendoDialog").open();
             //$('#dialogWindow').data("kendoDialog").open();
+        }
+
+        function onUpload(e) {
+            var HospIDValue = $("#ddlHospital").data("kendoDropDownList").value();
+
+            e.data = { HospID: HospIDValue };
         }
 
         $(document).ready(function () {
@@ -159,7 +169,7 @@
                         .Name("ddlHospital")
                         .DataTextField("HospName")
                         .DataValueField("HospID")
-                        //.Events(e => e.Change("onChange_totfa"))
+                        .Events(e => e.Change("onChange_totfa"))
                         .Filter("contains")
                         .DataSource(source =>
                         {
@@ -183,10 +193,7 @@
                         .Events(e => e.Change("onChange"))
                         .DataSource(source =>
                         {
-                            source.Read(read =>
-                            {
-                                read.Action("GetTotfa", "Sys");
-                            });
+                            source.Read(read => read.Action("GetTotfa", "Sys").Data("FromHospitalData"));                                  
                         })
                         .Enable(true)
                         .HtmlAttributes(new { @class = "form-control pull-left" })
@@ -273,7 +280,7 @@
                                             model.Id(o => o.id);
                                         })
                                         .Events(events => events.Error("error_handler").Sync("sync_handler"))
-                                        .Read(read => read.Action("Get_Ordfa_By_Id", "HIUpload", new { id = "#=id#" }))
+                                        .Read(read => read.Action("Get_Ordfa_By_Id", "HIUpload", new { sDtlfaID = "#=id#" }).Data("GetHosptialSelected"))
                                         .PageSize(10))
                                         .Sortable()
                                         .ToClientTemplate()
@@ -289,9 +296,9 @@
                                             .HtmlAttributes(new { accept = ".xml" })
                                             .Validation(v => v.AllowedExtensions(new string[] { ".xml", ".zip" }))
                                             .Async(async => async.AutoUpload(false)
-                                                .Save("Async_Save", "HIUpload", new { HospRowid = ViewBag.HospRowid })
+                                                .Save("Async_Save", "HIUpload")     //, new { HospID = @ViewBag.HospID }
                                                 .Remove("Async_Remove", "HIUpload"))
-                                        //.Events(e => e.Success("onSuccess"))
+                                            .Events(e => e.Upload("onUpload"))
                                         )
                                     }
                             </text>).Draggable().Resizable().Width(350).Actions(actions => actions.Close()).Events(ev => ev.Close("onClose")).Visible(false)
@@ -318,6 +325,7 @@
                                 {
                                     columns.Bound(d => d.USRowid).Hidden(true);
                                     columns.Bound(d => d.USHospRowid).Hidden(true);
+                                    columns.Bound(d => d.USHospID).Hidden(true);
                                     columns.Bound(d => d.USLoadDateTime).Format("{0: yyyy-MM-dd HH:mm:ss}").Width(120);
                                     columns.Bound(d => d.USLoadFilename);
                                     columns.Bound(d => d.USServerStatus).Width(80);
@@ -345,7 +353,7 @@
                                     .PageSize(50)
                                     .Model(model => model.Id(p => p.USRowid))
                                     //.Events(events => events.Error("error_handler").Sync("sync_handler"))
-                                    .Read(read => read.Action("Get_ServerStatus_By_HospID", "Sys", new { HospRowid = "1234567890" }))
+                                    .Read(read => read.Action("Get_ServerStatus_By_HospID", "Sys").Data("GetHosptialSelected"))
                                 ))
                         </div>
                     </div>

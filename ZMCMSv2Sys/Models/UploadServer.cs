@@ -16,6 +16,7 @@ namespace ZMCMSv2Sys.Models
     {
         public string USRowid { get; set; }
         public string USHospRowid { get; set; }
+        public string USHospID { get; set; }
         public string USLoadFilename { get; set; }
         public System.DateTime USLoadDateTime { get; set; }
         public string USServerStatus { get; set; }

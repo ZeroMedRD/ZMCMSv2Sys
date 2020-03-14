@@ -107,8 +107,11 @@ namespace ZMCMSv2Sys.ViewModels
         [Display(Name = "資料序號")]
         public string USRowid { get; set; }
 
-        [Display(Name = "醫事機構序號")]
+        [Display(Name = "醫事機構資料序號")]
         public string USHospRowid { get; set; }
+
+        [Display(Name = "醫事機構代碼")]
+        public string USHospID { get; set; }
 
         [Display(Name = "上傳檔案名稱")]
         public string USLoadFilename { get; set; }
