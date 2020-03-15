@@ -20,5 +20,6 @@ namespace HIUConsole.Model
         public System.DateTime USLoadDateTime { get; set; }
         public string USServerStatus { get; set; }
         public int USRecordCount { get; set; }
+        public string USHospID { get; set; }
     }
 }

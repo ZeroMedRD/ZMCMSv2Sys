@@ -1,0 +1,618 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="dtlfa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="totfa_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="d1" Type="nvarchar" MaxLength="10" />
+          <Property Name="d2" Type="nvarchar" MaxLength="10" />
+          <Property Name="d3" Type="nvarchar" MaxLength="10" />
+          <Property Name="d4" Type="nvarchar" MaxLength="10" />
+          <Property Name="d5" Type="nvarchar" MaxLength="10" />
+          <Property Name="d6" Type="nvarchar" MaxLength="10" />
+          <Property Name="d7" Type="nvarchar" MaxLength="10" />
+          <Property Name="d8" Type="nvarchar" MaxLength="10" />
+          <Property Name="d9" Type="nvarchar" MaxLength="10" />
+          <Property Name="d10" Type="nvarchar" MaxLength="10" />
+          <Property Name="d11" Type="nvarchar" MaxLength="10" />
+          <Property Name="d12" Type="nvarchar" MaxLength="10" />
+          <Property Name="d13" Type="nvarchar" MaxLength="10" />
+          <Property Name="d14" Type="nvarchar" MaxLength="10" />
+          <Property Name="d15" Type="nvarchar" MaxLength="10" />
+          <Property Name="d16" Type="nvarchar" MaxLength="10" />
+          <Property Name="d17" Type="nvarchar" MaxLength="10" />
+          <Property Name="d18" Type="nvarchar" MaxLength="10" />
+          <Property Name="d19" Type="nvarchar" MaxLength="10" />
+          <Property Name="d20" Type="nvarchar" MaxLength="10" />
+          <Property Name="d21" Type="nvarchar" MaxLength="10" />
+          <Property Name="d22" Type="nvarchar" MaxLength="10" />
+          <Property Name="d23" Type="nvarchar" MaxLength="10" />
+          <Property Name="d24" Type="nvarchar" MaxLength="10" />
+          <Property Name="d25" Type="nvarchar" MaxLength="10" />
+          <Property Name="d26" Type="nvarchar" MaxLength="10" />
+          <Property Name="d27" Type="nvarchar" MaxLength="10" />
+          <Property Name="d28" Type="nvarchar" MaxLength="10" />
+          <Property Name="d29" Type="nvarchar" MaxLength="10" />
+          <Property Name="d30" Type="nvarchar" MaxLength="10" />
+          <Property Name="d31" Type="nvarchar" MaxLength="10" />
+          <Property Name="d32" Type="nvarchar" MaxLength="10" />
+          <Property Name="d33" Type="nvarchar" MaxLength="10" />
+          <Property Name="d34" Type="nvarchar" MaxLength="10" />
+          <Property Name="d35" Type="nvarchar" MaxLength="10" />
+          <Property Name="d36" Type="nvarchar" MaxLength="10" />
+          <Property Name="d37" Type="nvarchar" MaxLength="10" />
+          <Property Name="d38" Type="nvarchar" MaxLength="10" />
+          <Property Name="d39" Type="nvarchar" MaxLength="10" />
+          <Property Name="d40" Type="nvarchar" MaxLength="10" />
+          <Property Name="d41" Type="nvarchar" MaxLength="10" />
+          <Property Name="d42" Type="nvarchar" MaxLength="10" />
+          <Property Name="d43" Type="nvarchar" MaxLength="10" />
+          <Property Name="d44" Type="nvarchar" MaxLength="10" />
+          <Property Name="d45" Type="nvarchar" MaxLength="10" />
+          <Property Name="d46" Type="nvarchar" MaxLength="11" />
+          <Property Name="d47" Type="nvarchar" MaxLength="11" />
+          <Property Name="d48" Type="nvarchar" MaxLength="10" />
+          <Property Name="d49" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="ordfa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="dtlfa_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="intSeq" Type="int" />
+          <Property Name="p1" Type="nvarchar" MaxLength="10" />
+          <Property Name="p2" Type="nvarchar" MaxLength="10" />
+          <Property Name="p3" Type="nvarchar" MaxLength="10" />
+          <Property Name="p4" Type="nvarchar" MaxLength="12" />
+          <Property Name="p5" Type="nvarchar" MaxLength="10" />
+          <Property Name="p6" Type="nvarchar" MaxLength="10" />
+          <Property Name="p7" Type="nvarchar" MaxLength="10" />
+          <Property Name="p8" Type="nvarchar" MaxLength="10" />
+          <Property Name="p9" Type="nvarchar" MaxLength="10" />
+          <Property Name="p10" Type="nvarchar" MaxLength="10" />
+          <Property Name="p11" Type="nvarchar" MaxLength="10" />
+          <Property Name="p12" Type="nvarchar" MaxLength="10" />
+          <Property Name="p13" Type="nvarchar" MaxLength="10" />
+          <Property Name="p14" Type="nvarchar" MaxLength="11" />
+          <Property Name="p15" Type="nvarchar" MaxLength="11" />
+          <Property Name="p16" Type="nvarchar" MaxLength="10" />
+          <Property Name="p17" Type="nvarchar" MaxLength="10" />
+          <Property Name="p18" Type="nvarchar" MaxLength="10" />
+          <Property Name="p19" Type="nvarchar" MaxLength="10" />
+          <Property Name="p20" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="patient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="strPrgID" Type="nvarchar" MaxLength="20" />
+          <Property Name="strPrgPws" Type="nvarchar" MaxLength="20" />
+          <Property Name="strUserAccount" Type="nvarchar" MaxLength="20" />
+          <Property Name="strDisplayName" Type="nvarchar" MaxLength="20" />
+          <Property Name="bolisMale" Type="bit" />
+          <Property Name="bolisAgreement" Type="bit" />
+          <Property Name="strCell" Type="nvarchar" MaxLength="20" />
+          <Property Name="strEMail" Type="nvarchar" MaxLength="50" />
+          <Property Name="strPassword" Type="nvarchar" MaxLength="20" />
+          <Property Name="strTempPhoto" Type="nvarchar" MaxLength="20" />
+          <Property Name="datBirthday" Type="datetime" />
+          <Property Name="strAddSecCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="strCommunityCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="intUserID" Type="int" />
+          <Property Name="floHeight" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="floWeight" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="ftp_file_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="intRsRecno" Type="int" />
+          <Property Name="strRecno" Type="nvarchar" MaxLength="15" />
+          <Property Name="strName" Type="nvarchar" MaxLength="20" />
+          <Property Name="strShortcut" Type="nvarchar" MaxLength="10" />
+          <Property Name="strIdno" Type="nvarchar" MaxLength="20" />
+          <Property Name="strTel" Type="nvarchar" MaxLength="20" />
+          <Property Name="strAddr" Type="nvarchar" MaxLength="100" />
+          <Property Name="strCompanyName" Type="nvarchar" MaxLength="20" />
+          <Property Name="strCompanyTel" Type="nvarchar" MaxLength="20" />
+          <Property Name="strCompanyTitle" Type="nvarchar" MaxLength="20" />
+          <Property Name="strGroup" Type="nvarchar" MaxLength="20" />
+          <Property Name="strBlood" Type="nvarchar" MaxLength="10" />
+          <Property Name="intMerry" Type="int" />
+          <Property Name="intWork" Type="int" />
+          <Property Name="strHabit" Type="nvarchar" MaxLength="20" />
+          <Property Name="strAllergy" Type="nvarchar" MaxLength="40" />
+          <Property Name="strHistory" Type="nvarchar" MaxLength="40" />
+          <Property Name="strDrug" Type="nvarchar" MaxLength="40" />
+          <Property Name="strWorkOther" Type="nvarchar" MaxLength="40" />
+          <Property Name="strAllergyOther" Type="nvarchar" MaxLength="40" />
+          <Property Name="strHistoryOther" Type="nvarchar" MaxLength="40" />
+          <Property Name="strDrugOther" Type="nvarchar" MaxLength="40" />
+          <Property Name="hisMemo" Type="nvarchar(max)" />
+          <Property Name="phsTypeMemo" Type="nvarchar(max)" />
+          <Property Name="laboratoryMemo" Type="nvarchar(max)" />
+          <Property Name="patientMemo" Type="nvarchar(max)" />
+          <Property Name="isPrivate" Type="bit" />
+          <Property Name="isFreezen" Type="bit" />
+          <Property Name="hospital_no" Type="nvarchar" MaxLength="10" />
+          <Property Name="g8_mode" Type="nvarchar" MaxLength="1" />
+          <Property Name="employee_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="doctor_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="doctorG8_id" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'his1234567890.dbo.patientMedicalGroup' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="totfa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="t1" Type="nvarchar" MaxLength="10" />
+          <Property Name="t2" Type="nvarchar" MaxLength="10" />
+          <Property Name="t3" Type="nvarchar" MaxLength="10" />
+          <Property Name="t4" Type="nvarchar" MaxLength="10" />
+          <Property Name="t5" Type="nvarchar" MaxLength="10" />
+          <Property Name="t6" Type="nvarchar" MaxLength="10" />
+          <Property Name="t7" Type="nvarchar" MaxLength="10" />
+          <Property Name="t8" Type="nvarchar" MaxLength="10" />
+          <Property Name="t9" Type="nvarchar" MaxLength="10" />
+          <Property Name="t10" Type="nvarchar" MaxLength="10" />
+          <Property Name="t11" Type="nvarchar" MaxLength="10" />
+          <Property Name="t12" Type="nvarchar" MaxLength="10" />
+          <Property Name="t13" Type="nvarchar" MaxLength="10" />
+          <Property Name="t14" Type="nvarchar" MaxLength="10" />
+          <Property Name="t15" Type="nvarchar" MaxLength="10" />
+          <Property Name="t16" Type="nvarchar" MaxLength="10" />
+          <Property Name="t17" Type="nvarchar" MaxLength="10" />
+          <Property Name="t18" Type="nvarchar" MaxLength="10" />
+          <Property Name="t19" Type="nvarchar" MaxLength="10" />
+          <Property Name="t20" Type="nvarchar" MaxLength="10" />
+          <Property Name="t21" Type="nvarchar" MaxLength="10" />
+          <Property Name="t22" Type="nvarchar" MaxLength="10" />
+          <Property Name="t23" Type="nvarchar" MaxLength="10" />
+          <Property Name="t24" Type="nvarchar" MaxLength="10" />
+          <Property Name="t25" Type="nvarchar" MaxLength="10" />
+          <Property Name="t26" Type="nvarchar" MaxLength="10" />
+          <Property Name="t27" Type="nvarchar" MaxLength="10" />
+          <Property Name="t28" Type="nvarchar" MaxLength="10" />
+          <Property Name="t29" Type="nvarchar" MaxLength="10" />
+          <Property Name="t30" Type="nvarchar" MaxLength="10" />
+          <Property Name="t31" Type="nvarchar" MaxLength="10" />
+          <Property Name="t32" Type="nvarchar" MaxLength="10" />
+          <Property Name="t33" Type="nvarchar" MaxLength="10" />
+          <Property Name="t34" Type="nvarchar" MaxLength="10" />
+          <Property Name="t35" Type="nvarchar" MaxLength="10" />
+          <Property Name="t36" Type="nvarchar" MaxLength="10" />
+          <Property Name="t37" Type="nvarchar" MaxLength="10" />
+          <Property Name="t38" Type="nvarchar" MaxLength="10" />
+          <Property Name="t39" Type="nvarchar" MaxLength="10" />
+          <Property Name="t40" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityContainer Name="HISModelStoreContainer">
+          <EntitySet Name="dtlfa" EntityType="Self.dtlfa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ordfa" EntityType="Self.ordfa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="patient" EntityType="Self.patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="totfa" EntityType="Self.totfa" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HISModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="dtlfa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="totfa_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="d1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d2" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d3" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d4" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d5" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d6" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d7" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d8" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d9" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d10" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d11" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d12" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d13" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d14" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d15" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d16" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d17" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d18" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d19" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d20" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d21" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d22" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d23" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d24" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d25" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d26" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d27" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d28" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d29" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d30" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d31" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d32" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d33" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d34" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d35" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d36" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d37" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d38" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d39" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d40" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d41" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d42" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d43" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d44" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d45" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d46" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="d47" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="d48" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="d49" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ordfa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dtlfa_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="intSeq" Type="Int32" />
+          <Property Name="p1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="p2" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="p3" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="p4" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="p5" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="p6" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="p7" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="p8" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="p9" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="p10" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="p11" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="p12" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="p13" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="p14" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="p15" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="p16" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="p17" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="p18" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="p19" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="p20" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="patient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="strPrgID" MaxLength="20" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="strPrgPws" MaxLength="20" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="strUserAccount" MaxLength="20" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="strDisplayName" MaxLength="20" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="bolisMale" Type="Boolean" />
+          <Property Name="bolisAgreement" Type="Boolean" />
+          <Property Name="strCell" MaxLength="20" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="strEMail" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="strPassword" MaxLength="20" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="strTempPhoto" MaxLength="20" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="datBirthday" Precision="3" Type="DateTime" />
+          <Property Name="strAddSecCode" MaxLength="10" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="strCommunityCode" MaxLength="20" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="intUserID" Type="Int32" />
+          <Property Name="floHeight" Precision="10" Scale="2" Type="Decimal" />
+          <Property Name="floWeight" Precision="10" Scale="2" Type="Decimal" />
+          <Property Name="ftp_file_id" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="intRsRecno" Type="Int32" />
+          <Property Name="strRecno" MaxLength="15" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="strName" MaxLength="20" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="strShortcut" MaxLength="10" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="strIdno" MaxLength="20" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="strTel" MaxLength="20" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="strAddr" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="strCompanyName" MaxLength="20" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="strCompanyTel" MaxLength="20" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="strCompanyTitle" MaxLength="20" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="strGroup" MaxLength="20" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="strBlood" MaxLength="10" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="intMerry" Type="Int32" />
+          <Property Name="intWork" Type="Int32" />
+          <Property Name="strHabit" MaxLength="20" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="strAllergy" MaxLength="40" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="strHistory" MaxLength="40" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="strDrug" MaxLength="40" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="strWorkOther" MaxLength="40" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="strAllergyOther" MaxLength="40" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="strHistoryOther" MaxLength="40" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="strDrugOther" MaxLength="40" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="hisMemo" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="phsTypeMemo" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="laboratoryMemo" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="patientMemo" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="isPrivate" Type="Boolean" />
+          <Property Name="isFreezen" Type="Boolean" />
+          <Property Name="hospital_no" MaxLength="10" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="g8_mode" MaxLength="1" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="employee_id" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="doctor_id" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="doctorG8_id" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+        </EntityType>
+        <EntityType Name="totfa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="t1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t2" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t3" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t4" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t5" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t6" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t7" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t8" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t9" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t10" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t11" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t12" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t13" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t14" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t15" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t16" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t17" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t18" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t19" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t20" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t21" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t22" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t23" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t24" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t25" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t26" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t27" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t28" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t29" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t30" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t31" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t32" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t33" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t34" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t35" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t36" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t37" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t38" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t39" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="t40" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="HISEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="dtlfa" EntityType="Self.dtlfa" />
+          <EntitySet Name="ordfa" EntityType="Self.ordfa" />
+          <EntitySet Name="patient" EntityType="Self.patient" />
+          <EntitySet Name="totfa" EntityType="Self.totfa" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HISModelStoreContainer" CdmEntityContainer="HISEntities">
+          <EntitySetMapping Name="dtlfa">
+            <EntityTypeMapping TypeName="HISModel.dtlfa">
+              <MappingFragment StoreEntitySet="dtlfa">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="totfa_id" ColumnName="totfa_id" />
+                <ScalarProperty Name="d1" ColumnName="d1" />
+                <ScalarProperty Name="d2" ColumnName="d2" />
+                <ScalarProperty Name="d3" ColumnName="d3" />
+                <ScalarProperty Name="d4" ColumnName="d4" />
+                <ScalarProperty Name="d5" ColumnName="d5" />
+                <ScalarProperty Name="d6" ColumnName="d6" />
+                <ScalarProperty Name="d7" ColumnName="d7" />
+                <ScalarProperty Name="d8" ColumnName="d8" />
+                <ScalarProperty Name="d9" ColumnName="d9" />
+                <ScalarProperty Name="d10" ColumnName="d10" />
+                <ScalarProperty Name="d11" ColumnName="d11" />
+                <ScalarProperty Name="d12" ColumnName="d12" />
+                <ScalarProperty Name="d13" ColumnName="d13" />
+                <ScalarProperty Name="d14" ColumnName="d14" />
+                <ScalarProperty Name="d15" ColumnName="d15" />
+                <ScalarProperty Name="d16" ColumnName="d16" />
+                <ScalarProperty Name="d17" ColumnName="d17" />
+                <ScalarProperty Name="d18" ColumnName="d18" />
+                <ScalarProperty Name="d19" ColumnName="d19" />
+                <ScalarProperty Name="d20" ColumnName="d20" />
+                <ScalarProperty Name="d21" ColumnName="d21" />
+                <ScalarProperty Name="d22" ColumnName="d22" />
+                <ScalarProperty Name="d23" ColumnName="d23" />
+                <ScalarProperty Name="d24" ColumnName="d24" />
+                <ScalarProperty Name="d25" ColumnName="d25" />
+                <ScalarProperty Name="d26" ColumnName="d26" />
+                <ScalarProperty Name="d27" ColumnName="d27" />
+                <ScalarProperty Name="d28" ColumnName="d28" />
+                <ScalarProperty Name="d29" ColumnName="d29" />
+                <ScalarProperty Name="d30" ColumnName="d30" />
+                <ScalarProperty Name="d31" ColumnName="d31" />
+                <ScalarProperty Name="d32" ColumnName="d32" />
+                <ScalarProperty Name="d33" ColumnName="d33" />
+                <ScalarProperty Name="d34" ColumnName="d34" />
+                <ScalarProperty Name="d35" ColumnName="d35" />
+                <ScalarProperty Name="d36" ColumnName="d36" />
+                <ScalarProperty Name="d37" ColumnName="d37" />
+                <ScalarProperty Name="d38" ColumnName="d38" />
+                <ScalarProperty Name="d39" ColumnName="d39" />
+                <ScalarProperty Name="d40" ColumnName="d40" />
+                <ScalarProperty Name="d41" ColumnName="d41" />
+                <ScalarProperty Name="d42" ColumnName="d42" />
+                <ScalarProperty Name="d43" ColumnName="d43" />
+                <ScalarProperty Name="d44" ColumnName="d44" />
+                <ScalarProperty Name="d45" ColumnName="d45" />
+                <ScalarProperty Name="d46" ColumnName="d46" />
+                <ScalarProperty Name="d47" ColumnName="d47" />
+                <ScalarProperty Name="d48" ColumnName="d48" />
+                <ScalarProperty Name="d49" ColumnName="d49" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ordfa">
+            <EntityTypeMapping TypeName="HISModel.ordfa">
+              <MappingFragment StoreEntitySet="ordfa">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="dtlfa_id" ColumnName="dtlfa_id" />
+                <ScalarProperty Name="intSeq" ColumnName="intSeq" />
+                <ScalarProperty Name="p1" ColumnName="p1" />
+                <ScalarProperty Name="p2" ColumnName="p2" />
+                <ScalarProperty Name="p3" ColumnName="p3" />
+                <ScalarProperty Name="p4" ColumnName="p4" />
+                <ScalarProperty Name="p5" ColumnName="p5" />
+                <ScalarProperty Name="p6" ColumnName="p6" />
+                <ScalarProperty Name="p7" ColumnName="p7" />
+                <ScalarProperty Name="p8" ColumnName="p8" />
+                <ScalarProperty Name="p9" ColumnName="p9" />
+                <ScalarProperty Name="p10" ColumnName="p10" />
+                <ScalarProperty Name="p11" ColumnName="p11" />
+                <ScalarProperty Name="p12" ColumnName="p12" />
+                <ScalarProperty Name="p13" ColumnName="p13" />
+                <ScalarProperty Name="p14" ColumnName="p14" />
+                <ScalarProperty Name="p15" ColumnName="p15" />
+                <ScalarProperty Name="p16" ColumnName="p16" />
+                <ScalarProperty Name="p17" ColumnName="p17" />
+                <ScalarProperty Name="p18" ColumnName="p18" />
+                <ScalarProperty Name="p19" ColumnName="p19" />
+                <ScalarProperty Name="p20" ColumnName="p20" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patient">
+            <EntityTypeMapping TypeName="HISModel.patient">
+              <MappingFragment StoreEntitySet="patient">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="strPrgID" ColumnName="strPrgID" />
+                <ScalarProperty Name="strPrgPws" ColumnName="strPrgPws" />
+                <ScalarProperty Name="strUserAccount" ColumnName="strUserAccount" />
+                <ScalarProperty Name="strDisplayName" ColumnName="strDisplayName" />
+                <ScalarProperty Name="bolisMale" ColumnName="bolisMale" />
+                <ScalarProperty Name="bolisAgreement" ColumnName="bolisAgreement" />
+                <ScalarProperty Name="strCell" ColumnName="strCell" />
+                <ScalarProperty Name="strEMail" ColumnName="strEMail" />
+                <ScalarProperty Name="strPassword" ColumnName="strPassword" />
+                <ScalarProperty Name="strTempPhoto" ColumnName="strTempPhoto" />
+                <ScalarProperty Name="datBirthday" ColumnName="datBirthday" />
+                <ScalarProperty Name="strAddSecCode" ColumnName="strAddSecCode" />
+                <ScalarProperty Name="strCommunityCode" ColumnName="strCommunityCode" />
+                <ScalarProperty Name="intUserID" ColumnName="intUserID" />
+                <ScalarProperty Name="floHeight" ColumnName="floHeight" />
+                <ScalarProperty Name="floWeight" ColumnName="floWeight" />
+                <ScalarProperty Name="ftp_file_id" ColumnName="ftp_file_id" />
+                <ScalarProperty Name="intRsRecno" ColumnName="intRsRecno" />
+                <ScalarProperty Name="strRecno" ColumnName="strRecno" />
+                <ScalarProperty Name="strName" ColumnName="strName" />
+                <ScalarProperty Name="strShortcut" ColumnName="strShortcut" />
+                <ScalarProperty Name="strIdno" ColumnName="strIdno" />
+                <ScalarProperty Name="strTel" ColumnName="strTel" />
+                <ScalarProperty Name="strAddr" ColumnName="strAddr" />
+                <ScalarProperty Name="strCompanyName" ColumnName="strCompanyName" />
+                <ScalarProperty Name="strCompanyTel" ColumnName="strCompanyTel" />
+                <ScalarProperty Name="strCompanyTitle" ColumnName="strCompanyTitle" />
+                <ScalarProperty Name="strGroup" ColumnName="strGroup" />
+                <ScalarProperty Name="strBlood" ColumnName="strBlood" />
+                <ScalarProperty Name="intMerry" ColumnName="intMerry" />
+                <ScalarProperty Name="intWork" ColumnName="intWork" />
+                <ScalarProperty Name="strHabit" ColumnName="strHabit" />
+                <ScalarProperty Name="strAllergy" ColumnName="strAllergy" />
+                <ScalarProperty Name="strHistory" ColumnName="strHistory" />
+                <ScalarProperty Name="strDrug" ColumnName="strDrug" />
+                <ScalarProperty Name="strWorkOther" ColumnName="strWorkOther" />
+                <ScalarProperty Name="strAllergyOther" ColumnName="strAllergyOther" />
+                <ScalarProperty Name="strHistoryOther" ColumnName="strHistoryOther" />
+                <ScalarProperty Name="strDrugOther" ColumnName="strDrugOther" />
+                <ScalarProperty Name="hisMemo" ColumnName="hisMemo" />
+                <ScalarProperty Name="phsTypeMemo" ColumnName="phsTypeMemo" />
+                <ScalarProperty Name="laboratoryMemo" ColumnName="laboratoryMemo" />
+                <ScalarProperty Name="patientMemo" ColumnName="patientMemo" />
+                <ScalarProperty Name="isPrivate" ColumnName="isPrivate" />
+                <ScalarProperty Name="isFreezen" ColumnName="isFreezen" />
+                <ScalarProperty Name="hospital_no" ColumnName="hospital_no" />
+                <ScalarProperty Name="g8_mode" ColumnName="g8_mode" />
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+                <ScalarProperty Name="doctor_id" ColumnName="doctor_id" />
+                <ScalarProperty Name="doctorG8_id" ColumnName="doctorG8_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="totfa">
+            <EntityTypeMapping TypeName="HISModel.totfa">
+              <MappingFragment StoreEntitySet="totfa">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="t1" ColumnName="t1" />
+                <ScalarProperty Name="t2" ColumnName="t2" />
+                <ScalarProperty Name="t3" ColumnName="t3" />
+                <ScalarProperty Name="t4" ColumnName="t4" />
+                <ScalarProperty Name="t5" ColumnName="t5" />
+                <ScalarProperty Name="t6" ColumnName="t6" />
+                <ScalarProperty Name="t7" ColumnName="t7" />
+                <ScalarProperty Name="t8" ColumnName="t8" />
+                <ScalarProperty Name="t9" ColumnName="t9" />
+                <ScalarProperty Name="t10" ColumnName="t10" />
+                <ScalarProperty Name="t11" ColumnName="t11" />
+                <ScalarProperty Name="t12" ColumnName="t12" />
+                <ScalarProperty Name="t13" ColumnName="t13" />
+                <ScalarProperty Name="t14" ColumnName="t14" />
+                <ScalarProperty Name="t15" ColumnName="t15" />
+                <ScalarProperty Name="t16" ColumnName="t16" />
+                <ScalarProperty Name="t17" ColumnName="t17" />
+                <ScalarProperty Name="t18" ColumnName="t18" />
+                <ScalarProperty Name="t19" ColumnName="t19" />
+                <ScalarProperty Name="t20" ColumnName="t20" />
+                <ScalarProperty Name="t21" ColumnName="t21" />
+                <ScalarProperty Name="t22" ColumnName="t22" />
+                <ScalarProperty Name="t23" ColumnName="t23" />
+                <ScalarProperty Name="t24" ColumnName="t24" />
+                <ScalarProperty Name="t25" ColumnName="t25" />
+                <ScalarProperty Name="t26" ColumnName="t26" />
+                <ScalarProperty Name="t27" ColumnName="t27" />
+                <ScalarProperty Name="t28" ColumnName="t28" />
+                <ScalarProperty Name="t29" ColumnName="t29" />
+                <ScalarProperty Name="t30" ColumnName="t30" />
+                <ScalarProperty Name="t31" ColumnName="t31" />
+                <ScalarProperty Name="t32" ColumnName="t32" />
+                <ScalarProperty Name="t33" ColumnName="t33" />
+                <ScalarProperty Name="t34" ColumnName="t34" />
+                <ScalarProperty Name="t35" ColumnName="t35" />
+                <ScalarProperty Name="t36" ColumnName="t36" />
+                <ScalarProperty Name="t37" ColumnName="t37" />
+                <ScalarProperty Name="t38" ColumnName="t38" />
+                <ScalarProperty Name="t39" ColumnName="t39" />
+                <ScalarProperty Name="t40" ColumnName="t40" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

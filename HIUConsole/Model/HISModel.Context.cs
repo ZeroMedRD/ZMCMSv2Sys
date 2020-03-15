@@ -13,10 +13,10 @@ namespace HIUConsole.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ZMCMSEntities : DbContext
+    public partial class HISEntities : DbContext
     {
-        public ZMCMSEntities()
-            : base("name=ZMCMSEntities")
+        public HISEntities()
+            : base("name=HISEntities")
         {
         }
     
@@ -25,10 +25,9 @@ namespace HIUConsole.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<ComboDetail> ComboDetail { get; set; }
-        public virtual DbSet<ComboHDetail> ComboHDetail { get; set; }
-        public virtual DbSet<ComboHMaster> ComboHMaster { get; set; }
-        public virtual DbSet<ComboMaster> ComboMaster { get; set; }
-        public virtual DbSet<SysHospital> SysHospital { get; set; }
+        public virtual DbSet<dtlfa> dtlfa { get; set; }
+        public virtual DbSet<ordfa> ordfa { get; set; }
+        public virtual DbSet<patient> patient { get; set; }
+        public virtual DbSet<totfa> totfa { get; set; }
     }
 }

@@ -4,13 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ZMCMSv2_SysModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ZMCMSv2_SysModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="UploadServer">
           <Key>
             <PropertyRef Name="USRowid" />
           </Key>
           <Property Name="USRowid" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="USHospRowid" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="USHospID" Type="char" MaxLength="10" Nullable="false" />
           <Property Name="USLoadFilename" Type="nvarchar(max)" Nullable="false" />
           <Property Name="USLoadDateTime" Type="datetime" Nullable="false" />
           <Property Name="USServerStatus" Type="char" MaxLength="1" Nullable="false" />
@@ -19,8 +20,7 @@
         <EntityContainer Name="ZMCMSv2_SysModelStoreContainer">
           <EntitySet Name="UploadServer" EntityType="Self.UploadServer" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ZMCMSv2_SysModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -34,6 +34,7 @@
           <Property Name="USLoadDateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="USServerStatus" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="USRecordCount" Type="Int32" Nullable="false" />
+          <Property Name="USHospID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityContainer Name="ZMCMSv2_SysEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="UploadServer" EntityType="Self.UploadServer" />
@@ -47,6 +48,7 @@
           <EntitySetMapping Name="UploadServer">
             <EntityTypeMapping TypeName="ZMCMSv2_SysModel.UploadServer">
               <MappingFragment StoreEntitySet="UploadServer">
+                <ScalarProperty Name="USHospID" ColumnName="USHospID" />
                 <ScalarProperty Name="USRowid" ColumnName="USRowid" />
                 <ScalarProperty Name="USHospRowid" ColumnName="USHospRowid" />
                 <ScalarProperty Name="USLoadFilename" ColumnName="USLoadFilename" />

@@ -39,6 +39,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="OYLib">
+      <HintPath>..\..\..\Cloud\OneDrive\專案\AppProject\20161104-開發用類別庫\OYLib\bin\Debug\OYLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -52,20 +55,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\ComboDetail.cs">
-      <DependentUpon>ZMCMS_SysModel.tt</DependentUpon>
+    <Compile Include="Model\dtlfa.cs">
+      <DependentUpon>HISModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\ComboHDetail.cs">
-      <DependentUpon>ZMCMS_SysModel.tt</DependentUpon>
+    <Compile Include="Model\HisEntities.cs" />
+    <Compile Include="Model\HISModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HISModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\ComboHMaster.cs">
-      <DependentUpon>ZMCMS_SysModel.tt</DependentUpon>
+    <Compile Include="Model\HISModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HISModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\ComboMaster.cs">
-      <DependentUpon>ZMCMS_SysModel.tt</DependentUpon>
+    <Compile Include="Model\HISModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HISModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\SysHospital.cs">
-      <DependentUpon>ZMCMS_SysModel.tt</DependentUpon>
+    <Compile Include="Model\ordfa.cs">
+      <DependentUpon>HISModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\patient.cs">
+      <DependentUpon>HISModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\totfa.cs">
+      <DependentUpon>HISModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\UploadServer.cs">
       <DependentUpon>ZMCMSv2_SysModel.tt</DependentUpon>
@@ -85,21 +101,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ZMCMSv2_SysModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\ZMCMS_SysModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ZMCMS_SysModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ZMCMS_SysModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ZMCMS_SysModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ZMCMS_SysModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ZMCMS_SysModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -109,20 +110,30 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ZMCMSv2_SysModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="Model\HISModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HISModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\HISModel.edmx.diagram">
+      <DependentUpon>HISModel.edmx</DependentUpon>
+    </None>
     <None Include="Model\ZMCMSv2_SysModel.edmx.diagram">
       <DependentUpon>ZMCMSv2_SysModel.edmx</DependentUpon>
-    </None>
-    <EntityDeploy Include="Model\ZMCMS_SysModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ZMCMS_SysModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Model\ZMCMS_SysModel.edmx.diagram">
-      <DependentUpon>ZMCMS_SysModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Model\HISModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HISModel.edmx</DependentUpon>
+      <LastGenOutput>HISModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\HISModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HISModel.edmx</DependentUpon>
+      <LastGenOutput>HISModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Model\ZMCMSv2_SysModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ZMCMSv2_SysModel.Context.cs</LastGenOutput>
@@ -132,16 +143,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ZMCMSv2_SysModel.edmx</DependentUpon>
       <LastGenOutput>ZMCMSv2_SysModel.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model\ZMCMS_SysModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ZMCMS_SysModel.edmx</DependentUpon>
-      <LastGenOutput>ZMCMS_SysModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model\ZMCMS_SysModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ZMCMS_SysModel.edmx</DependentUpon>
-      <LastGenOutput>ZMCMS_SysModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
