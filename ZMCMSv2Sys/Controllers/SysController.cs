@@ -11,7 +11,7 @@ using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using ZMCMSv2Sys.ViewModels;
 using ZMCMSv2Sys.Models;
-using OYLib;
+using ZMLib;
 
 namespace ZMCMSv2Sys.Controllers
 {
@@ -21,7 +21,7 @@ namespace ZMCMSv2Sys.Controllers
         private ZMCMSv2_SysEntities db_zmcmsv2_sys = new ZMCMSv2_SysEntities();
         private ZMCMSEntities db_zmcms = new ZMCMSEntities();
 
-        OYClass myClass = new OYClass();
+        ZMClass myClass = new ZMClass();
 
         //public string GetSQLConnectionString(
         //    string dbs,
@@ -51,14 +51,25 @@ namespace ZMCMSv2Sys.Controllers
         //    return csBuilder.ToString();
         //}
 
+        #region 申報上傳回傳 View
         public ActionResult HIUpload(string id)
         {
             ViewBag.HospID = id;
 
             return View();
         }
+        #endregion
 
+        #region 檢驗上傳回傳 View
+        public ActionResult LISUpload(string id)
+        {
+            ViewBag.HospID = id;
 
+            return View();
+        }
+        #endregion
+
+        #region 取得Totfa 選項內容，如:10901、10902 等依此類推
         public JsonResult GetTotfa(string sId)
         {
             HISEntities db_his = new HISEntities(myClass.GetSQLConnectionString(@"23.97.65.134,1933", "his" + sId, @"sa", @"I@ntif@t"));
@@ -70,7 +81,9 @@ namespace ZMCMSv2Sys.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
             //return Json(result);
         }
+        #endregion
 
+        #region 取得 醫事機構名稱選項，若傳入參數 HospID 空白或 Null 則取所有有開通的醫事機構名單，反之，則取該傳入的代號做為選單取的依據
         public JsonResult GetHospital(string HospID)
         {
             if (string.IsNullOrEmpty(HospID))
@@ -92,7 +105,9 @@ namespace ZMCMSv2Sys.Controllers
                 return Json(result, JsonRequestBehavior.AllowGet);
             }                        
         }
+        #endregion
 
+        #region 取得主機轉檔排程詳細狀態
         public ActionResult Get_ServerStatus_By_HospID([DataSourceRequest]DataSourceRequest request, string sHospID)
         {
             DataSourceResult
@@ -114,5 +129,6 @@ namespace ZMCMSv2Sys.Controllers
 
             return Json(result);
         }
+        #endregion
     }
 }

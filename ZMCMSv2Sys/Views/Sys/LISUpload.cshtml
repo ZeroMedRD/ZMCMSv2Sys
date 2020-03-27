@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "申報資料上傳作業";
+    ViewBag.Title = "檢驗資料上傳作業";
 }
 
 <!DOCTYPE html>
@@ -24,6 +24,7 @@
             }
         }
 
+        // 
         function onChange_totfa() {
             var hospid = this.value();            
 
@@ -209,31 +210,37 @@
             </div>
             <div class="col-md-2">
                 <div class="input-group" style="float:left;">
-                    <span class="input-group-addon no-modify-color">申報年月：</span>
-                    @(Html.Kendo().DropDownList()
-                        .Name("ddlTOTFA")
-                        .DataTextField("t3")
-                        .DataValueField("id")
-                        .Events(e => e.Change("onChange"))
-                        .DataSource(source =>
-                        {
-                            source.Read(read => read.Action("GetTotfa", "Sys").Data("FromHospitalData"));
-                        })
-                        .Enable(true)
-                        .HtmlAttributes(new { @class = "form-control pull-left" })
-                    )
+                    <span class="input-group-addon no-modify-color">上傳時間設定：</span>
+                        @(Html.Kendo().DateTimePicker()
+                            .Name("uploadTime")
+                            .Value(DateTime.Now)
+                            .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
+                        .DateInput()
+)
+                    @*@(Html.Kendo().DropDownList()
+            .Name("ddlTOTFA")
+            .DataTextField("t3")
+            .DataValueField("id")
+            .Events(e => e.Change("onChange"))
+            .DataSource(source =>
+            {
+                source.Read(read => read.Action("GetTotfa", "Sys").Data("FromHospitalData"));
+            })
+            .Enable(true)
+            .HtmlAttributes(new { @class = "form-control pull-left" })
+        )*@
                 </div>
             </div>
             <div class="col-md-6">
                 @*<div style="float:left;padding-right:10px;"><button type="submit" class="btn bg-blue-active">查詢</button></div>*@
-                <span id="uploadButton" class="btn bg-blue-active">上傳檔案(TOTFA.XML)</span>
+                <span id="uploadButton" class="btn bg-blue-active">上傳檢驗檔案</span>
             </div>
         </div>
         <div class="row">
             <div class="col-md-8">
                 <div class="box box-success">
                     <div class="box-header with-border head-title">
-                        <h3 class="box-title">申報點數清單資料</h3>
+                        <h3 class="box-title">檢驗單據資料</h3>
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool head-title" data-widget="collapse" data-toggle="tooltip">
                                 <i class="fa fa-minus"></i>
@@ -242,7 +249,7 @@
                     </div>
                     <div class="box-body">
                         <div id="myWindow">
-                            @(Html.Kendo().Grid<ZMCMSv2Sys.ViewModels.ViewModel_HIDtlfa>()
+                            @(Html.Kendo().Grid<ZMCMSv2Sys.ViewModels.ViewModel_LP>()
                                 .Name("grid_Dtlfa")
                                 .Columns(columns =>
                                 {
