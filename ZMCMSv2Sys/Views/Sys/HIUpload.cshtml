@@ -274,7 +274,7 @@
                                     .PageSize(50)
                                 )
                                 .NoRecords("目前未有任何資料顯示 !")
-                            )   
+                            )
                         </div>
                     </div>
                 </div>
@@ -305,23 +305,21 @@
                                 })
                                 .ColumnMenu()
                                 .Pageable(page => page.Refresh(true).ButtonCount(10).PageSizes(new[] { 15, 30, 50, 100 }).Messages(message => message.ItemsPerPage("每頁顯示數目")))
-                                .Selectable(selectable => selectable.Mode(GridSelectionMode.Single).Type(GridSelectionType.Row))                                
+                                .Selectable(selectable => selectable.Mode(GridSelectionMode.Single).Type(GridSelectionType.Row))
                                 .Navigatable()
                                 //.Sortable(sortable => { sortable.SortMode(GridSortMode.MultipleColumn); })
                                 //.Filterable()
                                 .Scrollable(scrollable => scrollable.Enabled(true).Height("250"))
                                 .DataSource(dataSource => dataSource.Ajax()
                                     .Sort(sort => sort.Add("intSeq").Ascending())
-                                    .Model(model => { model.Id(o => o.id); })                                    
+                                    .Model(model => { model.Id(o => o.id); })
                                     .Read(read => read.Action("Get_Ordfa_By_Id", "HIUpload"))
                                     .Events(events => events.Error("error_handler"))        // .Sync("sync_handler_ordfa")
                                     .PageSize(15))
                                 .NoRecords("目前未有任何資料顯示 !")
                             )
                         </div>
-
-                        @*上傳檔案作業視窗*@                        
-                        @(Html.Kendo().Window().Name("window").Title("上傳檔案").Content(@<text>
+                        @*@(Html.Kendo().Window().Name("window").Title("上傳檔案").Content(@<text>
                                 @using (@Html.BeginForm())
                                 {
                                     @(Html.Kendo().Upload()
@@ -335,10 +333,11 @@
                                         .Events(e => e.Upload("onUpload")))
                                 }
                             </text>).Draggable().Resizable().Width(350).Actions(actions => actions.Close()).Events(ev => ev.Close("onClose")).Visible(false)
-                        )
+                        )*@
                     </div>
                 </div>
 
+                @*上傳檔案作業視窗*@
                 @(Html.Kendo().Window().Name("window").Title("上傳檔案").Content(@<text>
                         @using (@Html.BeginForm())
                         {

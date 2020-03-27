@@ -4,10 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3d2e989200254651b6a4f419f6abc345" Name="Diagram1" ZoomLevel="109">
+      <Diagram DiagramId="3d2e989200254651b6a4f419f6abc345" Name="Diagram1" ZoomLevel="70">
         <EntityTypeShape EntityType="HISModel.dtlfa" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HISModel.ordfa" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HISModel.totfa" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HISModel.laboratoryPatient" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="HISModel.laboratoryPatientDetail" Width="1.5" PointX="7.375" PointY="4.75" />
+        <EntityTypeShape EntityType="HISModel.patient" Width="1.5" PointX="9.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

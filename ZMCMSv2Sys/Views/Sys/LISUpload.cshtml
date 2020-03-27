@@ -25,19 +25,19 @@
         }
 
         // 
-        function onChange_totfa() {
-            var hospid = this.value();            
+        //function onChange_totfa() {
+        //    var hospid = this.value();            
 
-            var ddl = $("#ddlTOTFA").data("kendoDropDownList");            
-            ddl.dataSource.read(hospid); // rebind the Grid's DataSource
+        //    var ddl = $("#ddlTOTFA").data("kendoDropDownList");            
+        //    ddl.dataSource.read(hospid); // rebind the Grid's DataSource
 
-            var gridDtlfa = $("#grid_Dtlfa").data("kendoGrid");
-            gridDtlfa.dataSource.read('');
-            var gridOrdfa = $("#grid_Ordfa").data("kendoGrid");
-            gridOrdfa.dataSource.read('');   
-            var grid = $("#grid_UploadFile").data("kendoGrid");
-            grid.dataSource.read(hospid);
-        }
+        //    var gridDtlfa = $("#grid_LP").data("kendoGrid");
+        //    gridDtlfa.dataSource.read('');
+        //    var gridOrdfa = $("#grid_LPD").data("kendoGrid");
+        //    gridOrdfa.dataSource.read('');   
+        //    var grid = $("#grid_UploadFile").data("kendoGrid");
+        //    grid.dataSource.read(hospid);
+        //}
 
         function FromHospitalData(e) {
             var value = $("#ddlHospital").data("kendoDropDownList").value();
@@ -48,17 +48,17 @@
         function onChange() {
             var pid = this.value();
 
-            var grid = $("#grid_Dtlfa").data("kendoGrid");
+            var grid = $("#grid_LP").data("kendoGrid");
             grid.dataSource.read(pid); // rebind the Grid's DataSource   
 
-            var gridOrdfa = $("#grid_Ordfa").data("kendoGrid");
+            var gridOrdfa = $("#grid_LPD").data("kendoGrid");
             gridOrdfa.dataSource.read('');
         }
 
         function additionalData(e) {
             var HospIDValue = $("#ddlHospital").data("kendoDropDownList").value();
-            var TOTFAValue = $("#ddlTOTFA").data("kendoDropDownList").value();            
-            return { sHospID: HospIDValue, sTotfaID: TOTFAValue };
+            //var TOTFAValue = $("#ddlTOTFA").data("kendoDropDownList").value();            
+            return { sHospID: HospIDValue };
         }
 
         function GetHosptialSelected(e) {
@@ -78,7 +78,7 @@
             //alert(dataItem.id);
             //alert(HospIDValue);
 
-            $("#grid_Ordfa").data("kendoGrid").dataSource.read({ sHospID: HospIDValue, id: dataItem.id });
+            $("#grid_LPD").data("kendoGrid").dataSource.read({ sHospID: HospIDValue, id: dataItem.id });
         }
 
         function sync_handler(e) { this.read(); }
@@ -118,13 +118,27 @@
                 $("#uploadButton").hide();
                 //$("#uploadButton").attr('disabled','disabled');
             });
-
-            //$("#showDialogBtn").bind("click", function () {
-            //    $("#dialogWindow").data("kendoDialog").open();
-            //    $("#dialogWindow").data("kendoDialog").center();
-            //    $("#showDialogBtn").hide();
-            //});
         });
+
+        function GetData() {
+            // 取得資料前,先把條件變數做整理
+            var HospIDValue = $("#ddlHospital").data("kendoDropDownList").value();
+            var startDateTimeValue = $("#startDateTime").data("kendoDatePicker").value();
+            var endDateTimeValue = $("#endDateTime").data("kendoDatePicker").value();
+
+            // 產生表頭資料
+            $("#grid_LP").data("kendoGrid").dataSource.read({ sHospID: HospIDValue, startDate: startDateTimeValue, endDate: endDateTimeValue });
+
+            // 測試取得資料內容
+            //alert(HospIDValue + " " + dateToString(startDateTimeValue) + " " + dateToString(endDateTimeValue));
+        }
+
+        function dateToString(date) {
+            var str = date.getFullYear() + "/";
+            str += ('0' + (date.getMonth() + 1)).slice(-2) + "/";
+            str += ('0' + date.getDate()).slice(-2) 
+            return str;
+        }
     </script>
 
     <style>
@@ -169,12 +183,12 @@
         .k-grid-header .k-header .k-link {
             color: white !important;
         }
-
-        #grid_Dtlfa .k-grid-header .k-header {
+                
+        #grid_LP .k-grid-header .k-header {
             background-color: #18538b;
         }
 
-        #grid_Ordfa .k-grid-header .k-header {
+        #grid_LPD .k-grid-header .k-header {
             background-color: #18538b;
         }
         
@@ -193,8 +207,7 @@
                     @(Html.Kendo().DropDownList()
                         .Name("ddlHospital")
                         .DataTextField("HospName")
-                        .DataValueField("HospID")
-                        .Events(e => e.Change("onChange_totfa"))
+                        .DataValueField("HospID")                        
                         .Filter("contains")
                         .DataSource(source =>
                         {
@@ -208,30 +221,37 @@
                     )
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-4">
                 <div class="input-group" style="float:left;">
-                    <span class="input-group-addon no-modify-color">上傳時間設定：</span>
-                        @(Html.Kendo().DateTimePicker()
-                            .Name("uploadTime")
-                            .Value(DateTime.Now)
-                            .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
-                        .DateInput()
-)
-                    @*@(Html.Kendo().DropDownList()
-            .Name("ddlTOTFA")
-            .DataTextField("t3")
-            .DataValueField("id")
-            .Events(e => e.Change("onChange"))
-            .DataSource(source =>
-            {
-                source.Read(read => read.Action("GetTotfa", "Sys").Data("FromHospitalData"));
-            })
-            .Enable(true)
-            .HtmlAttributes(new { @class = "form-control pull-left" })
-        )*@
+                    <span class="input-group-addon no-modify-color">檢驗資料查詢區間：</span>
+                    @(Html.Kendo().DatePicker().Name("startDateTime")
+                        .Value(DateTime.Today)
+                        .Max(DateTime.Today)
+                        .ParseFormats(new string[] { "yyyy/MM/dd" })
+                        //.Events(e => e.Change("startChange"))
+                        .HtmlAttributes(new { style = "width: 35%", title = "datetimepicker" }))
+                    至
+                    @(Html.Kendo().DatePicker().Name("endDateTime")
+                        .Value(DateTime.Today)
+                        //.Min(DateTime.Today)
+                        .ParseFormats(new string[] { "yyyy/MM/dd" })
+                        //.Events(e => e.Change("endChange"))
+                        .HtmlAttributes(new { style = "width: 35%", title = "datetimepicker" }))
+
+                    <div style="float:right;"><button id="QueryButton" class="btn bg-blue-active" onclick="GetData()">查詢</button></div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-3">
+                <div class="input-group" style="float:left;">
+                    <span class="input-group-addon no-modify-color">上傳時間設定：</span>
+                    @(Html.Kendo().DateTimePicker()
+                            .Name("uploadDateTime")
+                            .Value(DateTime.Today)
+                            .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
+                        .DateInput())
+                </div>
+            </div>
+            <div class="col-md-1">
                 @*<div style="float:left;padding-right:10px;"><button type="submit" class="btn bg-blue-active">查詢</button></div>*@
                 <span id="uploadButton" class="btn bg-blue-active">上傳檢驗檔案</span>
             </div>
@@ -250,16 +270,16 @@
                     <div class="box-body">
                         <div id="myWindow">
                             @(Html.Kendo().Grid<ZMCMSv2Sys.ViewModels.ViewModel_LP>()
-                                .Name("grid_Dtlfa")
+                                .Name("grid_LP")
                                 .Columns(columns =>
                                 {
                                     columns.Bound(d => d.id).Hidden(true);
-                                    columns.Bound(d => d.totfa_id).Hidden(true);
-                                    columns.Bound(d => d.d1);
-                                    columns.Bound(d => d.d2);
-                                    columns.Bound(d => d.d8);
-                                    columns.Bound(d => d.d9);
-                                    columns.Bound(d => d.d10);
+                                    columns.Bound(d => d.sno);
+                                    columns.Bound(d => d.laboratory_date).Format("{0: yyyy-MM-dd HH:mm:ss}");
+                                    columns.Bound(d => d.apply_date).Format("{0: yyyy-MM-dd HH:mm:ss}");
+                                    columns.Bound(d => d.report_date).Format("{0: yyyy-MM-dd HH:mm:ss}");
+                                    columns.Bound(d => d.patient_id).Hidden(true);
+                                    columns.Bound(d => d.patient_name);
                                 })
                                 .ColumnMenu()
                                 .Pageable(page => page.Refresh(true)
@@ -272,23 +292,21 @@
                                 .Sortable(sortable => { sortable.SortMode(GridSortMode.MultipleColumn); })
                                 .Filterable().Scrollable(scrollable => scrollable.Enabled(true).Height("150"))
                                 .DataSource(dataSource => dataSource.Ajax()
-                                    .Sort(x => { x.Add("d1").Ascending(); x.Add("d2").Ascending(); })
+                                    .Sort(x => { x.Add("laboratory_date").Ascending(); })   //; x.Add("d2").Ascending()
                                     .Model(model => { model.Id(h => h.id); })
-                                    //.Model(model => model.Id(p => p.id))
-                                    //.Events(events => events.Error("error_handler").Sync("sync_handler"))
-                                    .Read(read => read.Action("Get_Dtlfa_By_Id", "HIUpload").Data("additionalData"))
+                                    .Read(read => read.Action("GetLP", "LISUpload").Data("additionalData"))
                                     .Events(events => events.Error("error_handler").Sync("sync_handler"))
                                     .PageSize(50)
                                 )
                                 .NoRecords("目前未有任何資料顯示 !")
-                            )   
+                            )
                         </div>
                     </div>
                 </div>
 
                 <div class="box box-success">
                     <div class="box-header with-border head-title">
-                        <h3 class="box-title">申報醫令清單資料</h3>
+                        <h3 class="box-title">檢驗細項資料</h3>
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool head-title" data-widget="collapse" data-toggle="tooltip">
                                 <i class="fa fa-minus"></i>
@@ -297,55 +315,40 @@
                     </div>
                     <div class="box-body">
                         <div id="myWindow">
-                            @(Html.Kendo().Grid<ZMCMSv2Sys.ViewModels.ViewModel_HIOrdfa>()
-                                .Name("grid_Ordfa")
+                            @(Html.Kendo().Grid<ZMCMSv2Sys.ViewModels.ViewModel_LPD>()
+                                .Name("grid_LPD")
                                 .Columns(columns =>
                                 {
                                     columns.Bound(d => d.id).Hidden(true);
-                                    columns.Bound(d => d.dtlfa_id).Hidden(true);
-                                    columns.Bound(d => d.p4);
-                                    columns.Bound(d => d.p5);
-                                    columns.Bound(d => d.p1);
-                                    columns.Bound(d => d.p2);
-                                    columns.Bound(d => d.p7);
-                                    columns.Bound(d => d.intSeq);
+                                    columns.Bound(d => d.laboratoryPatient_id).Hidden(true);
+                                    columns.Bound(d => d.laboratoryItem_id).Hidden(true);
+                                    columns.Bound(d => d.laboratory_code);
+                                    columns.Bound(d => d.laboratory_name);
+                                    columns.Bound(d => d.laboratory_chnName);
+                                    columns.Bound(d => d.laboratory_unit);
+                                    columns.Bound(d => d.laboratory_standard);
+                                    columns.Bound(d => d.laboratory_nhi_code);
                                 })
                                 .ColumnMenu()
                                 .Pageable(page => page.Refresh(true).ButtonCount(10).PageSizes(new[] { 15, 30, 50, 100 }).Messages(message => message.ItemsPerPage("每頁顯示數目")))
-                                .Selectable(selectable => selectable.Mode(GridSelectionMode.Single).Type(GridSelectionType.Row))                                
+                                .Selectable(selectable => selectable.Mode(GridSelectionMode.Single).Type(GridSelectionType.Row))
                                 .Navigatable()
                                 //.Sortable(sortable => { sortable.SortMode(GridSortMode.MultipleColumn); })
                                 //.Filterable()
                                 .Scrollable(scrollable => scrollable.Enabled(true).Height("250"))
                                 .DataSource(dataSource => dataSource.Ajax()
                                     .Sort(sort => sort.Add("intSeq").Ascending())
-                                    .Model(model => { model.Id(o => o.id); })                                    
-                                    .Read(read => read.Action("Get_Ordfa_By_Id", "HIUpload"))
+                                    .Model(model => { model.Id(o => o.id); })
+                                    .Read(read => read.Action("GetLPD", "LISUpload"))
                                     .Events(events => events.Error("error_handler"))        // .Sync("sync_handler_ordfa")
                                     .PageSize(15))
                                 .NoRecords("目前未有任何資料顯示 !")
                             )
                         </div>
-
-                        @*上傳檔案作業視窗*@                        
-                        @(Html.Kendo().Window().Name("window").Title("上傳檔案").Content(@<text>
-                                @using (@Html.BeginForm())
-                                {
-                                    @(Html.Kendo().Upload()
-                                        .Multiple(true)
-                                        .Name("annex")
-                                        .HtmlAttributes(new { accept = ".xml" })
-                                        .Validation(v => v.AllowedExtensions(new string[] { ".xml", ".zip" }))
-                                        .Async(async => async.AutoUpload(false)
-                                            .Save("Async_Save", "HIUpload")     //, new { HospID = @ViewBag.HospID }
-                                            .Remove("Async_Remove", "HIUpload"))
-                                        .Events(e => e.Upload("onUpload")))
-                                }
-                            </text>).Draggable().Resizable().Width(350).Actions(actions => actions.Close()).Events(ev => ev.Close("onClose")).Visible(false)
-                        )
                     </div>
                 </div>
 
+                @*上傳檔案作業視窗*@
                 @(Html.Kendo().Window().Name("window").Title("上傳檔案").Content(@<text>
                         @using (@Html.BeginForm())
                         {
@@ -366,7 +369,7 @@
             <div class="col-md-4">
                 <div class="box box-danger">
                     <div class="box-header with-border head-title">
-                        <h3 class="box-title">上載資料</h3>
+                        <h3 class="box-title">上載資料處理狀態</h3>
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool head-title" data-widget="collapse" data-toggle="tooltip">
                                 <i class="fa fa-minus"></i>
@@ -418,71 +421,5 @@
             </div>
         </div>
     </div>
-
-    @*<script>
-            function dataBound() {
-                this.expandRow(this.tbody.find("tr.k-master-row").first());
-            }
-        </script>*@
-    @*<script type="text/javascript">
-        //function openWindow(e) {
-        //    e.preventDefault();
-
-        //    var grid = this;
-        //    var row = $(e.currentTarget).closest("tr");
-        //    wnd.center().open();
-
-        //    $("#yes").click(function () {
-        //        grid.removeRow(row);
-        //        wnd.close();
-        //    });
-
-        //    $("#no").click(function () {
-        //        wnd.close();
-        //    });
-        //}
-
-        //function error_handler(e) {
-        //    if (e.errors) {
-        //        var message = "Errors:\n";
-        //        $.each(e.errors, function (key, value) {
-        //            if ('errors' in value) {
-        //                $.each(value.errors, function () {
-        //                    message += this + "\n";
-        //                });
-        //            }
-        //        });
-        //        alert(message);
-        //    }
-        //}
-
-        //function sync_handler(e) { this.read(); }
-
-        //function sync_handler_ordfa(e) {
-        //    var element = $('#grid_Dtlfa').data('kendoGrid').select();
-        //    var dsh = $("#ddlHospital").data("kendoDropDownList").value();
-        //    var dsa = JSON.parse(JSON.stringify($('#grid_Dtlfa').data('kendoGrid').dataItem(element[0]), ['id']));
-        //    $("#grid_Ordfa").data("kendoGrid").dataSource.read({ HospID: dsh['HospID'], id: dsa['id'] });
-        //    alert(dsh + ":" + dsa);
-        //    //this.read();
-        //}
-
-        
-
-        //function DataHandlerName() {
-        //    var element = $('#grid_SchemaHead').data('kendoGrid').select();
-        //    var dsa = JSON.parse(JSON.stringify($('#grid_SchemaHead').data('kendoGrid').dataItem(element[0]), ['SHRowid']));
-        //    //var dsa = $('#grid_SchemaHead').data('kendoGrid').dataItem(element[0]);//JSON.parse(JSON.stringify($('#grid_SchemaHead').data('kendoGrid').dataItem(element[0]), ['SHRowid']));
-        //    //alert(dsa);
-
-        //    var request = {
-        //        id: dsa['SHRowid']
-        //    };
-
-        //    return request;
-        //}
-    </script>*@
 </body>
 </html>
-
-

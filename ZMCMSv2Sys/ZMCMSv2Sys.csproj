@@ -1776,9 +1776,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\LISUploadController.cs" />
     <Compile Include="Controllers\HIUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SysController.cs" />
+    <Compile Include="DAO\DAO_SQLink.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1786,7 +1788,16 @@
       <DependentUpon>ZMCMSv2Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HISEntities.cs" />
+    <Compile Include="Models\laboratoryPatient.cs">
+      <DependentUpon>ZMCMSv2Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\laboratoryPatientDetail.cs">
+      <DependentUpon>ZMCMSv2Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ordfa.cs">
+      <DependentUpon>ZMCMSv2Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\patient.cs">
       <DependentUpon>ZMCMSv2Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SysHospital.cs">

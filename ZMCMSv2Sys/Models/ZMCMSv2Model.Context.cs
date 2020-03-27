@@ -28,5 +28,8 @@ namespace ZMCMSv2Sys.Models
         public virtual DbSet<dtlfa> dtlfa { get; set; }
         public virtual DbSet<ordfa> ordfa { get; set; }
         public virtual DbSet<totfa> totfa { get; set; }
+        public virtual DbSet<laboratoryPatient> laboratoryPatient { get; set; }
+        public virtual DbSet<laboratoryPatientDetail> laboratoryPatientDetail { get; set; }
+        public virtual DbSet<patient> patient { get; set; }
     }
 }
