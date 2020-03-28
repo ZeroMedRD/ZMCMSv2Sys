@@ -23,34 +23,6 @@ namespace ZMCMSv2Sys.Controllers
 
         ZMClass myClass = new ZMClass();
 
-        //public string GetSQLConnectionString(
-        //    string dbs,
-        //    string dbn,
-        //    string userId,
-        //    string pw)
-        //{
-        //    SqlConnectionStringBuilder providerCs = new SqlConnectionStringBuilder();
-
-        //    providerCs.DataSource = dbs;
-        //    providerCs.InitialCatalog = String.IsNullOrEmpty(dbn) ? "his0000000000" : dbn;
-        //    //providerCs.UserInstance = true;
-        //    providerCs.UserID = userId;
-        //    providerCs.Password = pw;
-        //    providerCs.IntegratedSecurity = false;
-
-        //    var csBuilder = new EntityConnectionStringBuilder
-        //    {
-        //        Provider = "System.Data.SqlClient",
-        //        ProviderConnectionString = providerCs.ToString(),
-
-        //        //<add name="HISEntities" connectionString="metadata=res://*/Areas.HIS.Models.HISModel.csdl|res://*/Areas.HIS.Models.HISModel.ssdl|res://*/Areas.HIS.Models.HISModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=www.tongxin.com.tw,38301;initial catalog=3532040438;persist security info=True;user id=sa;password=23752100;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient"/>
-        //        //csBuilder.Metadata = string.Format("res://*/{0}/{1}.csdl|res://{0}/{1}.ssdl|res://{0}/{1}.msl",
-        //        Metadata = "res://*/Models.ZMCMSv2Model.csdl|res://*/Models.ZMCMSv2Model.ssdl|res://*/Models.ZMCMSv2Model.msl"
-        //    };
-
-        //    return csBuilder.ToString();
-        //}
-
         #region 申報上傳回傳 View
         public ActionResult HIUpload(string id)
         {

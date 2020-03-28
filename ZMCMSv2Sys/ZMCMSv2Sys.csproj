@@ -557,6 +557,16 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ZMCMSv2Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Models\AntifatModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AntifatModel.edmx</DependentUpon>
+      <LastGenOutput>AntifatModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\AntifatModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AntifatModel.edmx</DependentUpon>
+      <LastGenOutput>AntifatModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\ZMCMSModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ZMCMSModel.edmx</DependentUpon>
@@ -676,6 +686,13 @@
     <Content Include="Content\kendo\2018.2.516\kendo.uniform.mobile.min.css.map" />
     <Content Include="Content\kendo\kendo.custom.dataviz.json" />
     <Content Include="Content\kendo\kendo.custom.less" />
+    <EntityDeploy Include="Models\AntifatModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AntifatModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\AntifatModel.edmx.diagram">
+      <DependentUpon>AntifatModel.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -1784,6 +1801,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AntifatModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AntifatModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AntifatModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AntifatModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AntifatModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AntifatModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\dtlfa.cs">
       <DependentUpon>ZMCMSv2Model.tt</DependentUpon>
     </Compile>
@@ -1793,6 +1825,9 @@
     </Compile>
     <Compile Include="Models\laboratoryPatientDetail.cs">
       <DependentUpon>ZMCMSv2Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\laboratory_item.cs">
+      <DependentUpon>AntifatModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ordfa.cs">
       <DependentUpon>ZMCMSv2Model.tt</DependentUpon>

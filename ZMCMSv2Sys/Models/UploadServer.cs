@@ -19,7 +19,10 @@ namespace ZMCMSv2Sys.Models
         public string USHospID { get; set; }
         public string USLoadFilename { get; set; }
         public System.DateTime USLoadDateTime { get; set; }
+        public Nullable<System.DateTime> USBookingDatetime { get; set; }
+        public Nullable<System.DateTime> USFinishDateTime { get; set; }
         public string USServerStatus { get; set; }
         public int USRecordCount { get; set; }
+        public string USType { get; set; }
     }
 }

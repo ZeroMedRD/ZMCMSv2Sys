@@ -185,7 +185,7 @@ namespace ZMCMSv2Sys.ViewModels
         #endregion
 
         [Display(Name = "檢驗數值")]
-        public string data { get; set; }
+        public string dataValue { get; set; }
 
         [Display(Name = "檢驗結果")]
         public string result { get; set; }
@@ -225,11 +225,29 @@ namespace ZMCMSv2Sys.ViewModels
         [Display(Name = "上傳日期")]
         public DateTime? USLoadDateTime { get; set; }
 
+        [Display(Name = "預訂執行日期時間")]
+        public DateTime? USBookingDatetime { get; set; }
+
+        [Display(Name = "完成日期時間")]
+        public DateTime? USFinishDateTime { get; set; }
+
         [Display(Name = "狀態")]
         public string USServerStatus { get; set; }
+        // USServerStatus 定義，字母大寫:
+        // S: 待處理
+        // P: 處理中
+        // E: 已完成        
 
         [Display(Name = "上傳資料總筆數")]
         public int USRecordCount { get; set; }
+                
+        [Display(Name = "主機執行類別")]
+        public string USType { get; set; }
+        // USType 定義，字母大寫:
+        // H: 申報上傳 (使用者透過介面上載的檔案)
+        // L: 檢驗上傳 (使用者透過介面上載的檔案)
+        // A: 檢驗上傳 (使用者透過指定時間方式讓主機 Agent程式依時間到期時自動嫁接第三方執行自動匯入)
+        // P: 檢驗上傳 (主機 Agent程式依後台管理模式指定時間到期時自動嫁接第三方執行自動匯入)
     }
     #endregion
 }

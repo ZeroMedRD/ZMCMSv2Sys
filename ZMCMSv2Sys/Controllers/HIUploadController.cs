@@ -90,7 +90,8 @@ namespace ZMCMSv2Sys.Controllers
                         USLoadFilename = Session["targetNewFileName"].ToString(),
                         USLoadDateTime = DateTime.Now,
                         USServerStatus = "S",
-                        USRecordCount = 0
+                        USRecordCount = 0,
+                        USType = "H"
                     };
 
                     db_zmcmsv2_sys.UploadServer.Add(us);

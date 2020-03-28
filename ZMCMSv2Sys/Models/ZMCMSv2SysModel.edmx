@@ -14,8 +14,11 @@
           <Property Name="USHospID" Type="char" MaxLength="10" Nullable="false" />
           <Property Name="USLoadFilename" Type="nvarchar(max)" Nullable="false" />
           <Property Name="USLoadDateTime" Type="datetime" Nullable="false" />
+          <Property Name="USBookingDatetime" Type="datetime" />
+          <Property Name="USFinishDateTime" Type="datetime" />
           <Property Name="USServerStatus" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="USRecordCount" Type="int" Nullable="false" />
+          <Property Name="USType" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityContainer Name="ZMCMSv2_SysModelStoreContainer">
           <EntitySet Name="UploadServer" EntityType="Self.UploadServer" Schema="dbo" store:Type="Tables" />
@@ -36,8 +39,11 @@
           <Property Name="USHospID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="USLoadFilename" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="USLoadDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="USBookingDatetime" Type="DateTime" Precision="3" />
+          <Property Name="USFinishDateTime" Type="DateTime" Precision="3" />
           <Property Name="USServerStatus" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="USRecordCount" Type="Int32" Nullable="false" />
+          <Property Name="USType" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -48,8 +54,11 @@
           <EntitySetMapping Name="UploadServer">
             <EntityTypeMapping TypeName="ZMCMSv2_SysModel.UploadServer">
               <MappingFragment StoreEntitySet="UploadServer">
+                <ScalarProperty Name="USType" ColumnName="USType" />
                 <ScalarProperty Name="USRecordCount" ColumnName="USRecordCount" />
                 <ScalarProperty Name="USServerStatus" ColumnName="USServerStatus" />
+                <ScalarProperty Name="USFinishDateTime" ColumnName="USFinishDateTime" />
+                <ScalarProperty Name="USBookingDatetime" ColumnName="USBookingDatetime" />
                 <ScalarProperty Name="USLoadDateTime" ColumnName="USLoadDateTime" />
                 <ScalarProperty Name="USLoadFilename" ColumnName="USLoadFilename" />
                 <ScalarProperty Name="USHospID" ColumnName="USHospID" />

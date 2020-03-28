@@ -24,6 +24,7 @@ namespace ZMCMSv2Sys.Controllers
     {
         //private HISEntities db_his = new HISEntities();        
         private ZMCMSv2_SysEntities db_zmcmsv2_sys = new ZMCMSv2_SysEntities();
+        private antifatEntities db_antifat = new antifatEntities();
 
         ZMClass myClass = new ZMClass();
 
@@ -96,21 +97,107 @@ namespace ZMCMSv2Sys.Controllers
             // 資料庫連線取的方式同 GetLink(),請參考上述說明
             GetLink();
 
-            HISEntities db_his = new HISEntities(myClass.GetSQLConnectionString(@"23.97.65.134,1933", "his" + sHospID, @"sa", @"I@ntif@t"));
+            //HISEntities db_his = new HISEntities(myClass.GetSQLConnectionString(@"23.97.65.134,1933", "his" + sHospID, @"sa", @"I@ntif@t"));
+            //AFEntities db_antifat = new AFEntities(myClass.GetSQLConnectionString(dbs, "antifat", userid, password));
+            var db_af = (from af in db_antifat.laboratory_item
+                         select new
+                         {
+                             id = af.id,
+                             code = af.code,
+                             name = af.name,
+                             chnName = af.chnName,
+                             unit = af.unit,
+                             standard = af.standard,
+                             nhi_code = af.nhi_code
+                         }).ToList();
+
+            HISEntities db_his = new HISEntities(myClass.GetSQLConnectionString(dbs, "his" + sHospID, userid, password));
+
+            var db_lpd = (from lpd in db_his.laboratoryPatientDetail
+                          where lpd.laboratoryPatient_id == id
+                          select new
+                          {
+                              id = lpd.id,
+                              laboratoryPatient_id = lpd.laboratoryPatient_id,
+                              laboratoryItem_id = lpd.laboratoryItem_id,
+                              dataValue = lpd.data,
+                              result = lpd.result,
+                              unit = lpd.unit,
+                              standard = lpd.standard,
+                              intSeq = lpd.intSeq,
+                              bolisDone = lpd.bolisDone,
+                              drugMemo = lpd.drugMemo
+                          }).ToList();
+
+            DataSourceResult result = null;
+            result = (from a in db_lpd
+                      join b in db_af on a.laboratoryItem_id equals b.id
+                      // LINQ Left Join https://blog.miniasp.com/post/2010/10/14/LINQ-to-SQL-Query-Tips-INNER-JOIN-and-LEFT-JOIN
+                      into ps from b in ps.DefaultIfEmpty()     
+                      select new
+                      {
+                          id = a.id,
+                          laboratoryPatient_id = a.laboratoryPatient_id,
+                          laboratoryItem_id = a.laboratoryItem_id,
+                          laboratory_code = b.code,
+                          laboratory_name = b.name,
+                          laboratory_chnName = b.chnName,
+                          laboratory_unit = b.unit,
+                          laboratory_standard = b.standard,
+                          laboratory_nhi_code = b.nhi_code,
+                          dataValue = a.dataValue,
+                          result = a.result,
+                          unit = a.unit,
+                          standard = a.standard,
+                          intSeq = a.intSeq,
+                          bolisDone = a.bolisDone,
+                          drugMemo = a.drugMemo
+                      }).ToDataSourceResult(request);      
             
-            DataSourceResult result;
+            return Json(result);
+        }
+
+        [HttpPost]
+        public ActionResult PushDT2Server(string sHospID, DateTime pdt)
+        {
+            bool isValid = false;
+
+            // 把上傳的紀錄寫至 UploadServer
             try
             {
-                result = (from o in db_his.ordfa where o.dtlfa_id == id orderby o.p13 select o).ToDataSourceResult(request);
+                var us = new UploadServer()
+                {
+                    USRowid = Guid.NewGuid().ToString(),
+                    USHospRowid = "LISPMBK",
+                    USHospID = sHospID,
+                    USLoadFilename = "由使用者設定自動匯入，預計執行時間:" + pdt.ToString(),
+                    USLoadDateTime = DateTime.Now,
+                    USBookingDatetime = pdt,
+                    USServerStatus = "S",
+                    USRecordCount = 0,
+                    USType = "A"
+                };
+
+                db_zmcmsv2_sys.UploadServer.Add(us);
+                db_zmcmsv2_sys.SaveChanges();
+
+                isValid = true;
+                
             }
             catch
             {
-                result = null;
+                isValid = false;                
             }
 
-            return Json(result);
+            var obj = new
+            {
+                valid = isValid
+            };
+
+            return Json(obj);
         }
-       
+
+
         public ActionResult Async_Save(IEnumerable<HttpPostedFileBase> annex, string HospID)
         {
             string connDRUGSys = ConfigurationManager.ConnectionStrings["connSysDB"].ConnectionString;
@@ -136,12 +223,13 @@ namespace ZMCMSv2Sys.Controllers
                     var us = new UploadServer()
                     {
                         USRowid = Guid.NewGuid().ToString(),
-                        USHospRowid = "HIU",
+                        USHospRowid = "LISPUL",
                         USHospID = HospID,
                         USLoadFilename = Session["targetNewFileName"].ToString(),
                         USLoadDateTime = DateTime.Now,
                         USServerStatus = "S",
-                        USRecordCount = 0
+                        USRecordCount = 0,
+                        USType = "L"
                     };
 
                     db_zmcmsv2_sys.UploadServer.Add(us);
